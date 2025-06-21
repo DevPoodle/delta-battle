@@ -2,10 +2,13 @@ extends Node2D
 class_name Character
 
 @export var title := ""
+@export var equipped_weapon := " "
+@export var equipped_armor := " "
 @export var current_hp := 100
 @export var max_hp := 1
-@export var strength := 0
-@export var defense := 0
+@export var strength := 0 + weapon_strength + armor_strength
+@export var defense := 0 + armor_defence
+@export var magic := 0 + armor_magic_strength
 @export var uses_magic := false
 @export_color_no_alpha var main_color := Color.WHITE
 @export_color_no_alpha var icon_color := Color.GRAY
@@ -115,8 +118,34 @@ func use_item(p_character: Character, p_item: int) -> void:
 			p_character.heal(item.amount)
 			Global.display_text.emit("  * " + title + " used the " + item.name + "!", true)
 			Global.delete_item(p_item)
+		Item.TYPE.WEAPON:
+			p_character.equipped_weapon == name
+			Global.display_text.emit("  * " + title + " equipped the " + item.name + "!", true)
+			Global.delete_item(p_item)
+		Item.TYPE.ARMOR:
+			p_character.equipped_weapon == name
+			Global.display_text.emit("  * " + title + " equipped the " + item.name + "!", true)
+			Global.delete_item(p_item)
 	await Global.text_finished
 	item_used.emit()
+
+func unequip_item(p_character, p_item) -> void:
+	if item == null:
+		Global.display_text.emit(title + " but there was nothing to unequip", true)
+		await Global.text_finished
+		item_used.emit()
+	match item.type:
+		item.TYPE.WEAPON:
+			items.append(equipped_weapon)
+			p_character.equipped_weapon == " "
+			Global.display_text.emit("  * " + title + " unequipped the " + item.name + ".", true)
+		item.TYPE.ARMOR:
+			items.append(equipped_armor)
+			p_character.equipped_armor == " "
+			Global.display_text.emit("  * " + title + " unequipped the " + item.name + ".", true)
+		await Global.text_finished
+
+
 
 func prep_spare() -> void:
 	pass
