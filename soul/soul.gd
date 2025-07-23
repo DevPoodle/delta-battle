@@ -18,12 +18,10 @@ func _physics_process(delta: float) -> void:
 		$TPIndicator.modulate.a = maxf(0.0, 30.0 * graze_timer / 6.0 - 0.2)
 	if !active:
 		return
-	
 	var input := Vector2(
 		int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")),
 		int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	).normalized()
-	
 	velocity = Vector2.ZERO
 	if input != Vector2.ZERO:
 		velocity = SPEED * input
@@ -39,8 +37,6 @@ func hurt(p_damage: int) -> void:
 	get_parent().hurt(5 * p_damage)
 	invulnerable = true
 	$AnimationPlayer.play("invulnerable")
-		
-	
 
 func _on_tp_range_area_entered(p_area: Area2D) -> void:
 	grazed_pellets.append(p_area)
