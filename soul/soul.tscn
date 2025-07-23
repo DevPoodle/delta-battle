@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://daa26yfs5qdsb"]
+[gd_scene load_steps=8 format=3 uid="uid://daa26yfs5qdsb"]
 
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="1_llyy4"]
 [ext_resource type="Script" uid="uid://jryx47ruwybg" path="res://soul/soul.gd" id="1_rujom"]
@@ -6,6 +6,42 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rujom"]
 radius = 32.0
+
+[sub_resource type="Animation" id="Animation_sbg2m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_53ixt"]
+resource_name = "invulnerable"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart:self_modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vqolc"]
+_data = {
+&"RESET": SubResource("Animation_sbg2m"),
+&"invulnerable": SubResource("Animation_53ixt")
+}
 
 [node name="Soul" type="CharacterBody2D"]
 motion_mode = 1
@@ -29,5 +65,11 @@ shape = SubResource("CircleShape2D_rujom")
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("3_53ixt")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vqolc")
+}
+
 [connection signal="area_entered" from="TPRange" to="." method="_on_tp_range_area_entered"]
 [connection signal="area_exited" from="TPRange" to="." method="_on_tp_range_area_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

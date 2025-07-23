@@ -9,6 +9,8 @@ var active := false:
 		grazed_pellets.clear()
 var grazed_pellets: Array[Pellet] = []
 var graze_timer := 0.0
+var invulnerable := true
+
 
 func _physics_process(delta: float) -> void:
 	if graze_timer > 0.0:
@@ -28,14 +30,20 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("cancel"):
 			velocity *= 0.5
 	move_and_slide()
-	
+	modulate
 	for pellet: Pellet in grazed_pellets:
 		graze(pellet, delta)
 
 func hurt(p_damage: int) -> void:
+	if(invulnerable):
+		return
 	get_parent().hurt(5 * p_damage)
+		
+	
 
 func _on_tp_range_area_entered(p_area: Area2D) -> void:
+	if(invulnerable):
+		return
 	grazed_pellets.append(p_area)
 	graze(p_area, 1.0 / Engine.max_fps)
 
@@ -58,3 +66,8 @@ func graze(p_pellet: Pellet, p_delta: float) -> void:
 			get_parent().turn_timer -= p_pellet.time_points
 		Sounds.play("snd_graze", 0.7)
 		graze_timer = 1.0 / 3.0
+
+
+func _on_animation_player_animation_finished(invulnerable):
+	invulnerable = false
+	pass # Replace with function body.
