@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_53ixt"]
 resource_name = "invulnerable"
-length = 1.6
+length = 1.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,10 +32,10 @@ tracks/0/path = NodePath("Heart:self_modulate")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.6, 0.7, 0.9, 1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1), Color(0.501961, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vqolc"]
