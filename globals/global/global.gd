@@ -17,6 +17,7 @@ signal monster_killed
 signal display_text(p_text: String, p_requires_input: bool)
 signal text_finished
 
+var tp_coefficient := 1
 var displaying_text := false
 var characters: Array[Character] = []
 var monsters: Array[Monster] = []

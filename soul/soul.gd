@@ -3,6 +3,9 @@ class_name Soul
 
 const SPEED := 4.0 * 30.0 # 4 pixels per frame
 const SLOW_MULTIPLIER := 0.5
+
+@export var normalized_movement := false
+
 var active := false:
 	set(p_active):
 		active = p_active
@@ -24,7 +27,10 @@ func _physics_process(delta: float) -> void:
 	var input := Vector2(
 		int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")),
 		int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
-	).normalized()
+	)
+	
+	if normalized_movement:
+		input = input.normalized()
 	
 	velocity = Vector2.ZERO
 	if input != Vector2.ZERO:
@@ -54,7 +60,7 @@ func graze(p_pellet: Pellet, p_delta: float) -> void:
 	if(invulnerable):
 		return
 	if p_pellet.grazed:
-		Global.tp += 30.0 * p_delta * p_pellet.graze_points / 20.0
+		Global.tp += 30.0 * p_delta * p_pellet.graze_points * Global.tp_coefficient / 20.0
 		if get_parent().turn_timer >= 1.0 / 3.0:
 			get_parent().turn_timer -= 30.0 * p_delta * p_pellet.time_points / 20.0
 		if graze_timer >= 0.0 and graze_timer < 4.0 / 30.0:

@@ -208,7 +208,7 @@ func queue_character_action() -> void:
 		Global.DEFEND:
 			actions[current_char].what = Global.DEFEND
 			Global.characters[current_char].defend()
-			Global.tp += 40
+			Global.tp += 40 * Global.tp_coefficient
 			next_char()
 
 func next_char() -> void:
