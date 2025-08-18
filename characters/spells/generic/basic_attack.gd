@@ -14,7 +14,7 @@ func _init() -> void:
 		description = "Magical Attack."
 		target = 1
 
-func do_spell(p_from: Character, p_to: Node2D):
+func do_spell(p_from: Character, p_to: Node2D) -> void:
 	if !(p_to is Monster):
 		p_from.spell_finished.emit()
 		return

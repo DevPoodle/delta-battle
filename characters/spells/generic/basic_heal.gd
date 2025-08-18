@@ -14,7 +14,7 @@ func _init() -> void:
 		description = "Heal ally."
 		target = 0
 
-func do_spell(p_from: Character, p_to: Node2D):
+func do_spell(p_from: Character, p_to: Node2D) -> void:
 	if !(p_to is Character):
 		p_from.spell_finished.emit()
 		return
