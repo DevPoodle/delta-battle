@@ -7,6 +7,7 @@ class_name Spell
 @export_range(0, 100, 1) var tp_percent_cost := 10
 @export_enum("To Character", "To Enemy") var target := 0
 
-func do_spell(_p_from: Character, _p_to: Node2D) -> void:
+func do_spell(p_from: Character, _p_to: Node2D) -> void:
 	Global.display_text.emit(text, true)
 	await Global.text_finished
+	p_from.spell_finished.emit()

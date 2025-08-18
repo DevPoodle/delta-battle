@@ -24,4 +24,5 @@ func do_spell(p_from: Character, p_to: Node2D) -> void:
 	p_from.do_animation(animation_code)
 	Global.display_text.emit(text % [p_from.title, to.title], true)
 	await Global.text_finished
+	await Global.wait_time(0.01)
 	p_from.spell_finished.emit()

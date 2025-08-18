@@ -87,3 +87,6 @@ func change_to_scene(scene_path: String, fade := true) -> void:
 		get_tree().paused = false
 	else:
 		get_tree().change_scene_to_file(scene_path)
+
+func wait_time(time: float) -> Signal:
+	return get_tree().create_timer(time).timeout
