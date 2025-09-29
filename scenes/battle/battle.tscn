@@ -25,5 +25,3 @@ position = Vector2(308, 171)
 
 [node name="TPBar" parent="." instance=ExtResource("5_h0kxc")]
 position = Vector2(51, 139)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
