@@ -21,6 +21,9 @@ func do_spell(p_from: Character, p_to: Node2D) -> void:
 	
 	var to := p_to as Monster
 	to.take_damage(p_from, damage_amount)
+	to.damage_or_die_animation()
+	Sounds.play("snd_laz_c")
+	
 	p_from.do_animation(animation_code)
 	Global.display_text.emit(text % [p_from.title, to.title], true)
 	await Global.text_finished
