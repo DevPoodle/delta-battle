@@ -6,7 +6,7 @@ const SLOW_MULTIPLIER := 0.5
 
 @export var normalized_movement := false
 
-@export var heart : Sprite2D
+@export var heart: Sprite2D
 
 var active := false:
 	set(p_active):
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		graze(pellet, delta)
 
 func hurt(p_damage: int) -> void:
-	if(invulnerable):
+	if invulnerable:
 		return
 	get_parent().hurt(5 * p_damage)
 	invulnerable_state()
@@ -50,9 +50,9 @@ func invulnerable_state()-> void:
 	invulnerable = true
 	var tween = get_tree().create_tween()
 	tween.set_loops(5)
-	tween.tween_property(heart, "modulate", Color(0.501961, 0, 0, 1), 0)
+	tween.tween_property(heart, "modulate", Color(0.5, 0.0, 0.0, 1.0), 0.0)
 	tween.tween_interval(0.1)
-	tween.tween_property(heart, "modulate", Color(1, 1, 1, 1), 0)
+	tween.tween_property(heart, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.0)
 	tween.tween_interval(0.2)
 	await tween.finished
 	invulnerable = false
@@ -65,7 +65,7 @@ func _on_tp_range_area_exited(p_area: Area2D) -> void:
 	grazed_pellets.erase(p_area)
 
 func graze(p_pellet: Pellet, p_delta: float) -> void:
-	if(invulnerable):
+	if invulnerable:
 		return
 	if p_pellet.grazed:
 		Global.tp += 30.0 * p_delta * p_pellet.graze_points * Global.tp_coefficient / 20.0
