@@ -7,9 +7,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_rujom"]
 radius = 32.0
 
-[node name="Soul" type="CharacterBody2D"]
+[node name="Soul" type="CharacterBody2D" node_paths=PackedStringArray("heart")]
 motion_mode = 1
 script = ExtResource("1_rujom")
+heart = NodePath("Heart")
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6, -8, -6, -7, -7, -7, -7, -6, -8, -6, -8, 1, -7, 1, -7, 2, -6, 2, -6, 3, -5, 3, -5, 4, -4, 4, -4, 5, -3, 5, -3, 6, -2, 6, -2, 7, -1, 7, -1, 8, 1, 8, 1, 7, 2, 7, 2, 6, 3, 6, 3, 5, 4, 5, 4, 4, 5, 4, 5, 3, 6, 3, 6, 2, 7, 2, 7, 1, 8, 1, 8, -6, 7, -6, 7, -7, 6, -7, 6, -8, 2, -8, 2, -7, 1, -7, 1, -6, -1, -6, -1, -7, -2, -7, -2, -8)
