@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://s3b8ossymlfv"]
+[gd_scene load_steps=20 format=3 uid="uid://s3b8ossymlfv"]
 
 [ext_resource type="Script" uid="uid://bn2h3tiy1j6" path="res://characters/red/red.gd" id="1_fovij"]
 [ext_resource type="Texture2D" uid="uid://hmlks1o7yx5" path="res://characters/red/res/red_robot.png" id="2_754ah"]
@@ -6,16 +6,27 @@
 [ext_resource type="Script" uid="uid://ncp0eorg046u" path="res://characters/spells/spell.gd" id="3_rt23h"]
 [ext_resource type="Script" uid="uid://5bj6c7r0v2ee" path="res://characters/spells/generic/basic_heal.gd" id="4_e1kqw"]
 [ext_resource type="Script" uid="uid://c74hytev4kjc7" path="res://characters/spells/generic/basic_attack.gd" id="5_e1kqw"]
+[ext_resource type="Script" uid="uid://dffsfc3l6k8x1" path="res://characters/spells/generic/action.gd" id="6_ki0i3"]
+
+[sub_resource type="Resource" id="Resource_5i4yq"]
+script = ExtResource("6_ki0i3")
+flavor_texts = Dictionary[String, String]({
+"Slime": "Red stuck their arm into the slime!"
+})
+spare_percent = 0.1
+title = "R-Action"
+description = "Standard Action."
+tp_percent_cost = 0
+target = 1
+metadata/_custom_type_script = "uid://dffsfc3l6k8x1"
 
 [sub_resource type="Resource" id="Resource_ki0i3"]
 script = ExtResource("4_e1kqw")
-heal_amount = 50
 animation_code = 6
 title = "Heal"
 text = "  * %s healed %s."
 description = "Heal ally."
 tp_percent_cost = 30
-target = 0
 metadata/_custom_type_script = "uid://5bj6c7r0v2ee"
 
 [sub_resource type="Resource" id="Resource_i1457"]
@@ -240,7 +251,7 @@ main_color = Color(0.917647, 0, 0.137255, 1)
 icon_color = Color(0.768627, 0.196078, 0.317647, 1)
 icon = ExtResource("2_smr1s")
 main_sprite = NodePath("RedRobot")
-spells = Array[ExtResource("3_rt23h")]([SubResource("Resource_ki0i3"), SubResource("Resource_i1457")])
+spells = Array[ExtResource("3_rt23h")]([SubResource("Resource_5i4yq"), SubResource("Resource_ki0i3"), SubResource("Resource_i1457")])
 metadata/_custom_type_script = "uid://d1ho1nqa4x7fm"
 
 [node name="RedRobot" type="Sprite2D" parent="."]
