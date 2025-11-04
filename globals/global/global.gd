@@ -4,6 +4,10 @@ enum {
 	FIGHT, ACT, ITEM, SPARE, DEFEND
 }
 
+enum DefeatContext {
+	FLEE, SPARED, SNOWGRAVED
+}
+
 const YELLOW := Color("#ffff00")
 const GREEN := Color("#00ff00")
 const CENTER := Vector2(308.0, 171.0)
@@ -13,7 +17,7 @@ var tp := 0.0:
 		tp_changed.emit()
 
 signal tp_changed
-signal monster_killed
+signal monster_killed(monster : Monster, context : DefeatContext)
 signal display_text(p_text: String, p_requires_input: bool)
 signal text_finished
 
@@ -22,6 +26,10 @@ var displaying_text := false
 var characters: Array[Character] = []
 var monsters: Array[Monster] = []
 var items: Array[Item] = []
+
+#This is just here to make sure the calculation works.
+#Set this to whatever you want to get an accurate result.
+var chapter : int = 2
 
 func tp_percent_to_absolute(p_percent: float) -> float:
 	return p_percent / 100.0 * 250.0
@@ -67,11 +75,11 @@ func get_idle_line() -> String:
 			return "  * The battle goes on..."
 	return lines[randi_range(0, lines.size() - 1)]
 
-func delete_monster(p_monster: Monster) -> void:
+func delete_monster(p_monster: Monster, context : DefeatContext) -> void:
 	var monster_index := monsters.find(p_monster)
 	if monster_index != -1:
 		monsters[monster_index] = null
-	monster_killed.emit()
+	monster_killed.emit(p_monster, context)
 
 func delete_item(p_item: int) -> void:
 	items[p_item] = null

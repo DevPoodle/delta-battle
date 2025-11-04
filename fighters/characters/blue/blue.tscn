@@ -1,0 +1,226 @@
+[gd_scene load_steps=13 format=3 uid="uid://koaov6uan8c3"]
+
+[ext_resource type="Script" uid="uid://jit0je10t72y" path="res://fighters/characters/blue/blue.gd" id="1_hgvxa"]
+[ext_resource type="Texture2D" uid="uid://jthlsjuluo7b" path="res://fighters/characters/blue/res/char_icon.png" id="2_t3yiv"]
+[ext_resource type="Texture2D" uid="uid://didryh7wey76g" path="res://fighters/characters/blue/res/blue_robot.png" id="3_hgvxa"]
+
+[sub_resource type="Animation" id="Animation_shquf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlueRobot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yif2i"]
+resource_name = "act"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_uympt"]
+resource_name = "attack"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1.0],
+"method": &"shake_sprite"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ubgkb"]
+resource_name = "defend"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ogmq3"]
+resource_name = "faint"
+step = 0.005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlueRobot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099, 0.1, 0.175, 0.2, 0.225, 0.29, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -25), Vector2(0, -38), Vector2(0, -40), Vector2(0, -38), Vector2(0, -25), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [3.0],
+"method": &"shake_sprite"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_hgvxa"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_2f3wf"]
+resource_name = "prep_act"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 9]
+}
+
+[sub_resource type="Animation" id="Animation_j2q4k"]
+resource_name = "prep_attack"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlueRobot:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hgvxa"]
+_data = {
+&"RESET": SubResource("Animation_shquf"),
+&"act": SubResource("Animation_yif2i"),
+&"attack": SubResource("Animation_uympt"),
+&"defend": SubResource("Animation_ubgkb"),
+&"faint": SubResource("Animation_ogmq3"),
+&"idle": SubResource("Animation_hgvxa"),
+&"prep_act": SubResource("Animation_2f3wf"),
+&"prep_attack": SubResource("Animation_j2q4k")
+}
+
+[node name="Blue" type="Node2D"]
+script = ExtResource("1_hgvxa")
+title = "Blue"
+current_hp = 90
+max_hp = 90
+strength = 10
+defense = 4
+main_color = Color(0.118812, 0.590326, 0.738951, 1)
+icon_color = Color(0.353656, 0.485358, 0.879101, 1)
+icon = ExtResource("2_t3yiv")
+main_sprite = NodePath("BlueRobot")
+metadata/_custom_type_script = "uid://d1ho1nqa4x7fm"
+
+[node name="BlueRobot" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_hgvxa")
+hframes = 13
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hgvxa")
+}

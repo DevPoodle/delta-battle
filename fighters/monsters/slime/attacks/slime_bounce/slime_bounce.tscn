@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5v4rpycevwhc"]
+
+[ext_resource type="Script" uid="uid://du6lkqykgo8k3" path="res://fighters/monsters/slime/attacks/slime_bounce/slime_bounce.gd" id="1_m0puf"]
+[ext_resource type="Script" uid="uid://l1dijweo3y2y" path="res://pellets/pellet.gd" id="2_177tv"]
+[ext_resource type="Texture2D" uid="uid://du2a4rq014860" path="res://fighters/monsters/slime/attacks/slime_bounce/res/slime_pellet.png" id="3_rw1s2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw1s2"]
+size = Vector2(36, 31)
+
+[node name="SlimeBounce" type="Node2D"]
+script = ExtResource("1_m0puf")
+
+[node name="Pellet" type="Area2D" parent="."]
+collision_layer = 2
+input_pickable = false
+script = ExtResource("2_177tv")
+damage = 15
+metadata/_custom_type_script = "uid://l1dijweo3y2y"
+
+[node name="Sprite" type="Sprite2D" parent="Pellet"]
+texture = ExtResource("3_rw1s2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pellet"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_rw1s2")
+
+[connection signal="body_entered" from="Pellet" to="Pellet" method="_on_body_entered"]

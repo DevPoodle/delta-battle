@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CheckAct" load_steps=2 format=3 uid="uid://c05xy1gtm8dhc"]
+
+[ext_resource type="Script" uid="uid://cijjiumpk8w2l" path="res://fighters/characters/acts/check/check.gd" id="1_6ytxh"]
+
+[resource]
+script = ExtResource("1_6ytxh")
+title = "Check"
+text = "  * Nothing happened."
+spare_percent = 0
+metadata/_custom_type_script = "uid://cijjiumpk8w2l"

@@ -3,11 +3,18 @@ extends Node2D
 var in_attack := false
 var turn_timer := 0.0
 
+var total_money : int = 0
+var total_xp : int = 0
+
 func _ready() -> void:
 	set_positions($Characters, Global.characters, Vector2(108.0, 0.0))
 	set_positions($Monsters, Global.monsters, Vector2(640.0 - 108.0, 0.0))
 	Global.display_text.emit(Global.get_opening_line(), false)
 	Global.monster_killed.connect(monster_killed)
+	
+	for i in Global.monsters:
+		total_money += i.money_dropped
+		total_xp += i.xp_bled
 	
 	Sounds.play("snd_impact", 0.7)
 	Sounds.play("snd_weaponpull_fast", 0.8)
@@ -96,7 +103,10 @@ func hurt(p_damage: int) -> void:
 		Global.change_to_scene("res://scenes/menus/lost_screen/lost_screen.tscn")
 		Sounds.play("snd_break2", 0.6)
 
-func monster_killed() -> void:
+func monster_killed(monsterThatLeft : Monster, context : Global.DefeatContext) -> void:
+	if context != Global.DefeatContext.SNOWGRAVED:
+		total_xp -= monsterThatLeft.xp_bled
+	
 	var monsters_dead := true
 	for monster: Monster in Global.monsters:
 		if monster != null:
@@ -107,6 +117,10 @@ func monster_killed() -> void:
 		$BottomPanel/AttackTiming.focused = false
 		for character: Character in Global.characters:
 			character.do_animation(Character.Animations.IDLE)
-		Global.display_text.emit("  * You won!\n[color=#000]----[/color]Got 0 EXP and 10D$.", true)
+		Global.display_text.emit("  * You won!\n[color=#000]----[/color]Got " + str(total_xp) + " EXP and " + str(calculate_money()) + "D$.", true)
 		await Global.text_finished
 		Global.change_to_scene("res://scenes/menus/win_screen/win_screen.tscn")
+
+func calculate_money() -> int:
+	@warning_ignore("integer_division")
+	return (total_money * Global.chapter) / 4
