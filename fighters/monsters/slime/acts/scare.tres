@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Act" load_steps=2 format=3 uid="uid://b246jycqrpiow"]
+
+[ext_resource type="Script" uid="uid://bwvvm6kvpsqi1" path="res://fighters/characters/acts/act.gd" id="1_li0ic"]
+
+[resource]
+script = ExtResource("1_li0ic")
+title = "Scare"
+text = "  * You jumped out at the slime!
+  * It bounced much higher."
+spare_percent = 30
+metadata/_custom_type_script = "uid://bwvvm6kvpsqi1"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Act" load_steps=2 format=3 uid="uid://co7hijqhju0pe"]
+
+[ext_resource type="Script" uid="uid://bwvvm6kvpsqi1" path="res://fighters/characters/acts/act.gd" id="1_tu21y"]
+
+[resource]
+script = ExtResource("1_tu21y")
+title = "Jump"
+text = "  * You jumped along with the slime!
+  * The slime jumps even higher."
+spare_percent = 15
+metadata/_custom_type_script = "uid://bwvvm6kvpsqi1"
