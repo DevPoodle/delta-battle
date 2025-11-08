@@ -138,17 +138,17 @@ _data = {
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_r1nth")
-title = "Slime"
 description = "  * Slime - A bouncy little menace that [color=#000]----[/color]only cares about how high it can [color=#000]----[/color]jump."
 acts = Array[ExtResource("2_la5cp")]([ExtResource("3_vwcsi"), ExtResource("4_24fbq"), ExtResource("5_h1ox4")])
-current_hp = 130
-max_hp = 130
-strength = 7
-defense = 3
 idle_lines = PackedStringArray("  * The ground is covered in slime...", "  * You feel like jumping around.", "  * The slime is bouncing around even [color=#000]----[/color]faster!", "  * Don\'t get slimed!", "  * The slime looks extra squishy...")
 opening_line_singular = "  * A slime bounced into battle!"
 opening_line_plural = "  * The slimes bounced into battle!"
 main_sprite = NodePath("Sprite")
+title = "Slime"
+current_hp = 130
+max_hp = 130
+strength = 7
+defense = 3
 metadata/_custom_type_script = "uid://c7cl86f4gnd2b"
 
 [node name="Sprite" type="Sprite2D" parent="."]

@@ -5,18 +5,17 @@ enum Animations {
 	HURT, SPARE, FAINT
 }
 
-
 @export_multiline var description := ""
 @export var acts: Array[Act] = []
 
-@export var xp_bled : int = 10
-@export var money_dropped : int = 5
+@export var xp_bled := 10
+@export var money_dropped := 5
 
 @export var idle_lines: PackedStringArray
 @export_multiline var opening_line_singular := "  * An enemy approaches."
 @export_multiline var opening_line_plural := "  * Multiple enemies approach."
 
-@export_node_path("Sprite2D") var main_sprite
+@export_node_path("Sprite2D") var main_sprite: NodePath
 var sprite: Sprite2D
 var mat: ShaderMaterial
 var hurting := false

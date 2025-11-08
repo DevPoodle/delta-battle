@@ -1,7 +1,7 @@
 extends AbstractFighter
 class_name Character
 
-const CHECK_ACT = preload("res://fighters/characters/acts/check/check.tres")
+const CHECK_ACT := preload("res://fighters/characters/acts/check/check.tres")
 
 enum Animations {
 	IDLE, PREP_ATTACK, PREP_ACT, PREP_ITEM, PREP_SPARE, ATTACK, ACT, USE_ITEM, SPARE, DEFEND, FAINT, REVIVE
@@ -18,7 +18,7 @@ enum Animations {
 @export_color_no_alpha var icon_color := Color.GRAY
 @export var icon: Texture2D = preload("res://ui/battle/char_menu/res/sample_char_icon.png")
 
-@export_node_path("Sprite2D") var main_sprite
+@export_node_path("Sprite2D") var main_sprite: NodePath
 var sprite: Sprite2D
 var mat: ShaderMaterial
 var alive := true
@@ -27,7 +27,6 @@ var shake := 0.0
 
 ## The list of default spells the character can use. Only for characters with do_magic set to true.
 @export var spells: Array[Spell] = []
-
 
 signal act_finished
 signal spell_finished

@@ -1,7 +1,6 @@
 extends Node2D
 class_name AbstractFighter
 
-
 signal health_changed(p_new_health: int)
 
 @export var title := ""

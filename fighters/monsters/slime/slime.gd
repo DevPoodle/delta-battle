@@ -1,8 +1,8 @@
 extends Monster
 class_name Slime
 
-const SLIME_BOUNCE = preload("res://fighters/monsters/slime/attacks/slime_bounce/slime_bounce.tscn")
-const SLIME_DRIP = preload("res://fighters/monsters/slime/attacks/slime_drip/slime_drip.tscn")
+const SLIME_BOUNCE := preload("res://fighters/monsters/slime/attacks/slime_bounce/slime_bounce.tscn")
+const SLIME_DRIP := preload("res://fighters/monsters/slime/attacks/slime_drip/slime_drip.tscn")
 
 var velocity := 0.0
 var squishing := false
