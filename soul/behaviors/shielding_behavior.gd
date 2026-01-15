@@ -23,6 +23,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("left"):
 		rotate_shield(Vector2.LEFT)
 
+func end() -> void:
+	shield.queue_free()
 
 ##WIP
 ##I couldn't get the animated rotation code to work how I wanted.
