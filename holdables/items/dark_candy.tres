@@ -14,7 +14,6 @@ script = ExtResource("1_582rk")
 name = "Dark Candy"
 short_description = ""
 long_description = ""
-description = "An item that can be equipped."
 sell_value = 0
 inventory_tab = 0
 usePredicate = SubResource("Resource_mb7ij")

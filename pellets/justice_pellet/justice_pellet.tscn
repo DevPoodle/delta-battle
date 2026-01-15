@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyvb2eiaebvir"]
+
+[ext_resource type="Script" uid="uid://c4gnpiwc2ue1t" path="res://pellets/justice_pellet/justice_pellet.gd" id="1_7huqn"]
+[ext_resource type="Texture2D" uid="uid://c1w77ndygnrsh" path="res://pellets/justice_pellet/res/justice_pellet.png" id="2_7huqn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7huqn"]
+radius = 5.0
+
+[node name="JusticePellet" type="Area2D"]
+script = ExtResource("1_7huqn")
+rotate_sprite = true
+shape = 1
+graze_points = 0
+time_points = 0.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_7huqn")
+offset = Vector2(-5.035, -0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7huqn")

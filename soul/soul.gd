@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Soul
 
+@onready var collision: CollisionPolygon2D = $Collision
 @onready var grazer: Area2D = $Grazer
 @export var heart: Sprite2D
 @export var behaviors : Array[SoulBehavior]
@@ -16,7 +17,7 @@ var grazed_pellets: Array[Pellet] = []
 var invulnerable := false
 
 func _ready() -> void:
-	assign_heart_properties(SoulType.RED)
+	assign_heart_properties(SoulType.YELLOW)
 	for i in behaviors:
 		i.soul = self
 		i.start()
