@@ -35,6 +35,7 @@ Sounds="*res://globals/sounds/sounds.gd"
 [debug]
 
 gdscript/warnings/unused_signal=0
+gdscript/warnings/integer_division=0
 gdscript/warnings/confusable_local_declaration=0
 
 [display]

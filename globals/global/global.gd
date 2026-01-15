@@ -17,7 +17,7 @@ var tp := 0.0:
 		tp_changed.emit()
 
 signal tp_changed
-signal monster_killed(monster : Monster, context : DefeatContext)
+signal monster_killed(monster: Monster, context: DefeatContext)
 signal display_text(p_text: String, p_requires_input: bool)
 signal text_finished
 
@@ -26,10 +26,10 @@ var displaying_text := false
 var characters: Array[Character] = []
 var monsters: Array[Monster] = []
 var items: Array[Item] = []
+var heartColor : Color = SoulType.RED.color
 
-#This is just here to make sure the calculation works.
-#Set this to whatever you want to get an accurate result.
-var chapter : int = 2
+# The current chapter number affects how much money is earned from a battle.
+var chapter := 2
 
 func tp_percent_to_absolute(p_percent: float) -> float:
 	return p_percent / 100.0 * 250.0
@@ -38,9 +38,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		if event.is_action("toggle_fullscreen"):
+func _unhandled_input(p_event: InputEvent) -> void:
+	if p_event is InputEventKey and p_event.is_pressed():
+		if p_event.is_action("toggle_fullscreen"):
 			if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
 				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			else:
@@ -75,26 +75,29 @@ func get_idle_line() -> String:
 			return "  * The battle goes on..."
 	return lines[randi_range(0, lines.size() - 1)]
 
-func delete_monster(p_monster: Monster, context : DefeatContext) -> void:
+func delete_monster(p_monster: Monster, p_context: DefeatContext) -> void:
 	var monster_index := monsters.find(p_monster)
 	if monster_index != -1:
 		monsters[monster_index] = null
-	monster_killed.emit(p_monster, context)
+	monster_killed.emit(p_monster, p_context)
 
 func delete_item(p_item: int) -> void:
 	items[p_item] = null
 
-func change_to_scene(scene_path: String, fade := true) -> void:
-	if fade:
+func change_to_scene(p_scene_path: String, p_fade := true) -> void:
+	if p_fade:
 		PostProcessing.fade_out()
 		get_tree().paused = true
 		await PostProcessing.fade_finished
-		get_tree().change_scene_to_file(scene_path)
+		get_tree().change_scene_to_file(p_scene_path)
 		PostProcessing.fade_in()
 		await PostProcessing.fade_finished
 		get_tree().paused = false
 	else:
-		get_tree().change_scene_to_file(scene_path)
+		get_tree().change_scene_to_file(p_scene_path)
 
-func wait_time(time: float) -> Signal:
-	return get_tree().create_timer(time).timeout
+func wait_time(p_time: float) -> Signal:
+	return get_tree().create_timer(p_time).timeout
+
+func setHeartColor(color : Color) -> void:
+	heartColor = color

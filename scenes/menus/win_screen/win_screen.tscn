@@ -42,6 +42,7 @@ theme_override_font_sizes/font_size = 48
 text = "QUIT"
 
 [node name="Heart" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
 position = Vector2(183, 274)
 scale = Vector2(2, 2)
 texture = ExtResource("2_1d1ta")

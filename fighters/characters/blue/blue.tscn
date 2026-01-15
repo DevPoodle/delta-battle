@@ -204,14 +204,15 @@ _data = {
 
 [node name="Blue" type="Node2D"]
 script = ExtResource("1_hgvxa")
-title = "Blue"
-current_hp = 90
-max_hp = 90
-strength = 10
-defense = 4
 main_color = Color(0.118812, 0.590326, 0.738951, 1)
 icon_color = Color(0.353656, 0.485358, 0.879101, 1)
 icon = ExtResource("2_t3yiv")
+title = "Blue"
+base_fighter_stats = Dictionary[int, int]({
+0: 90,
+1: 4,
+2: 10
+})
 main_sprite = NodePath("BlueRobot")
 metadata/_custom_type_script = "uid://d1ho1nqa4x7fm"
 

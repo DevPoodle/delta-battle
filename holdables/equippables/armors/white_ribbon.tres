@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://c0yrdiysbiq0i"]
+
+[ext_resource type="Script" uid="uid://cp643of2mfab3" path="res://holdables/equippables/equippable_attribute.gd" id="1_v4tgt"]
+[ext_resource type="Script" uid="uid://cbtfclefu13k7" path="res://holdables/equippables/equippable.gd" id="2_oifns"]
+
+[resource]
+script = ExtResource("2_oifns")
+category = 0
+fighter_stat_modifiers = Dictionary[int, int]({
+1: 2
+})
+attributes = Dictionary[ExtResource("1_v4tgt"), int]({})
+fighter_equip_reactions = Dictionary[String, String]({})
+name = "White Ribbon"
+short_description = ""
+long_description = "A crinkly hair ribbon that slightly increases your defense."
+sell_value = 45
+inventory_tab = 2
+metadata/_custom_type_script = "uid://cbtfclefu13k7"

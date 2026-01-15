@@ -50,7 +50,7 @@ func hit() -> int:
 	var tween := get_tree().create_tween().set_parallel(true)
 	tween.tween_property($Flash, "modulate", Color.TRANSPARENT, 0.5)
 	tween.tween_property($Flash, "scale", Vector2(2.0, 2.0), 0.5)
-	var max_damage := Global.characters[char_id].strength * 5
+	var max_damage := Global.characters[char_id].get_strength() * 5
 	var damage := max_damage
 	if !perfect_hit:
 		if indicator.position.x > 82.0:

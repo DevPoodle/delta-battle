@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=5 format=3 uid="uid://c4gdp8ayox0il"]
+
+[ext_resource type="Script" uid="uid://cbtfclefu13k7" path="res://holdables/equippables/equippable.gd" id="1_4tdn7"]
+[ext_resource type="Script" uid="uid://cp643of2mfab3" path="res://holdables/equippables/equippable_attribute.gd" id="1_odjlu"]
+[ext_resource type="Script" uid="uid://42n4vg6qs1fv" path="res://holdables/light_world_form.gd" id="2_bon7u"]
+
+[sub_resource type="Resource" id="Resource_ge1qm"]
+script = ExtResource("2_bon7u")
+name = "Pencil"
+description = "Mightier than a sword?
+Maybe equal at best."
+metadata/_custom_type_script = "uid://42n4vg6qs1fv"
+
+[resource]
+script = ExtResource("1_4tdn7")
+category = 0
+fighter_stat_modifiers = Dictionary[int, int]({
+2: 1
+})
+attributes = Dictionary[ExtResource("1_odjlu"), int]({})
+fighter_equip_reactions = Dictionary[String, String]({})
+name = "Wood Blade"
+short_description = ""
+long_description = "An item that can be equipped."
+sell_value = 30
+inventory_tab = 3
+light_world_form = SubResource("Resource_ge1qm")
+metadata/_custom_type_script = "uid://cbtfclefu13k7"

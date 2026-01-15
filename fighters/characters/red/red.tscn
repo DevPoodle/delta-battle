@@ -229,18 +229,19 @@ _data = {
 
 [node name="Red" type="Node2D"]
 script = ExtResource("1_fovij")
-title = "Red"
-current_hp = 120
-max_hp = 120
-strength = 8
-defense = 2
-magic = 5
 uses_magic = true
 main_color = Color(0.917647, 0, 0.137255, 1)
 icon_color = Color(0.768627, 0.196078, 0.317647, 1)
 icon = ExtResource("2_smr1s")
-main_sprite = NodePath("RedRobot")
 spells = Array[ExtResource("3_rt23h")]([SubResource("Resource_ki0i3"), SubResource("Resource_i1457")])
+title = "Red"
+base_fighter_stats = Dictionary[int, int]({
+0: 120,
+1: 8,
+2: 2,
+3: 5
+})
+main_sprite = NodePath("RedRobot")
 metadata/_custom_type_script = "uid://d1ho1nqa4x7fm"
 
 [node name="RedRobot" type="Sprite2D" parent="."]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=3 format=3 uid="uid://bmxitgvjg0ble"]
+
+[ext_resource type="Script" uid="uid://cbtfclefu13k7" path="res://holdables/equippables/equippable.gd" id="1_f8kcx"]
+[ext_resource type="Script" uid="uid://cp643of2mfab3" path="res://holdables/equippables/equippable_attribute.gd" id="1_m2qrm"]
+
+[resource]
+script = ExtResource("1_f8kcx")
+category = 0
+fighter_stat_modifiers = Dictionary[int, int]({})
+attributes = Dictionary[ExtResource("1_m2qrm"), int]({})
+fighter_equip_reactions = Dictionary[String, String]({})
+name = "Iron Shackle"
+short_description = ""
+long_description = "Shackle that ironically increases your attack and defense."
+sell_value = 75
+inventory_tab = 2
+metadata/_custom_type_script = "uid://cbtfclefu13k7"

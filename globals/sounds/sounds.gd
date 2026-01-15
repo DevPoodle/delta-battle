@@ -9,20 +9,22 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	var sound_files := get_files_recursive("res://globals/sounds/sound_effects")
-	for file: String in sound_files:
-		var audio_player := AudioStreamPlayer.new()
-		audio_player.name = file.get_file().trim_suffix("." + file.get_extension())
-		audio_player.stream = load(file)
-		add_child(audio_player)
-		sounds.set(audio_player.name, audio_player)
+	if !sound_files.is_empty():
+		for file: String in sound_files:
+			var audio_player := AudioStreamPlayer.new()
+			audio_player.name = file.get_file().trim_suffix("." + file.get_extension())
+			audio_player.stream = load(file)
+			add_child(audio_player)
+			sounds.set(audio_player.name, audio_player)
 	
 	var music_files := get_files_recursive("res://globals/sounds/music")
-	for file: String in music_files:
-		var audio_player := AudioStreamPlayer.new()
-		audio_player.name = file.get_file().trim_suffix("." + file.get_extension())
-		audio_player.stream = load(file)
-		add_child(audio_player)
-		music.set(audio_player.name, audio_player)
+	if !music_files.is_empty():
+		for file: String in music_files:
+			var audio_player := AudioStreamPlayer.new()
+			audio_player.name = file.get_file().trim_suffix("." + file.get_extension())
+			audio_player.stream = load(file)
+			add_child(audio_player)
+			music.set(audio_player.name, audio_player)
 
 func get_files_recursive(p_directory: String) -> PackedStringArray:
 	var files := PackedStringArray()

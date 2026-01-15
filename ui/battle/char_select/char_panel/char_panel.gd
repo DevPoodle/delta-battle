@@ -16,6 +16,6 @@ func set_max_hp(p_max_hp: int) -> void:
 func set_from_character(p_character: Character) -> void:
 	set_title(p_character.title)
 	set_current_hp(p_character.current_hp)
-	set_max_hp(p_character.max_hp)
+	set_max_hp(p_character.get_max_hp())
 	char_id = Global.characters.find(p_character)
 	p_character.health_changed.connect(set_current_hp)
