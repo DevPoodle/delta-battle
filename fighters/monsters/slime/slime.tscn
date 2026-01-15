@@ -151,11 +151,6 @@ base_fighter_stats = Dictionary[int, int]({
 4: 1
 })
 main_sprite = NodePath("Sprite")
-title = "Slime"
-current_hp = 130
-max_hp = 130
-strength = 7
-defense = 3
 metadata/_custom_type_script = "uid://c7cl86f4gnd2b"
 
 [node name="Sprite" type="Sprite2D" parent="."]
