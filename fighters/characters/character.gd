@@ -176,7 +176,7 @@ func heal(p_amount: int) -> void:
 		current_hp = max_hp
 		create_text("MAX", Global.GREEN)
 	else:
-		create_text(str(p_amount), icon_color)
+		create_text(str(p_amount), Global.GREEN)
 
 func do_act(p_monster: Monster, p_act: int) -> void:
 	if p_monster == null:
