@@ -143,6 +143,10 @@ func faint() -> void:
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
+func set_current_hp(value: int) -> void:
+	current_hp = value
+	health_changed.emit(current_hp)
+
 func revive() -> void:
 	if current_hp < max_hp * 0.17:
 		current_hp = ceili(max_hp * 0.17)
@@ -153,7 +157,6 @@ func hurt(p_damage: int) -> void:
 	shake_sprite(4.0)
 	p_damage = int(maxi(1, p_damage - 3 * defense) * (1.0 if !defending else 2.0 / 3.0))
 	current_hp -= p_damage
-	health_changed.emit(current_hp)
 	create_text(str(p_damage), Color.WHITE)
 	Sounds.play("snd_hurt1")
 	if current_hp <= 0:
@@ -169,7 +172,6 @@ func heal(p_amount: int) -> void:
 		create_text("MAX", Global.GREEN)
 	else:
 		create_text(str(p_amount), icon_color)
-	health_changed.emit(current_hp)
 
 func do_act(p_monster: Monster, p_act: int) -> void:
 	if p_monster == null:

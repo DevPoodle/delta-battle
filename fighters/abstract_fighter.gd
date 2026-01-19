@@ -5,7 +5,7 @@ signal health_changed(p_new_health: int)
 
 @export var title := ""
 
-@export var current_hp := 100
+@export var current_hp := 100 : set = set_current_hp
 @export var max_hp := 100
 @export var strength := 0:
 	get():
@@ -27,3 +27,6 @@ func create_text(p_text: String, p_color: Color) -> void:
 	var new_text := preload("res://ui/battle/floating_text/floating_text.tscn").instantiate()
 	new_text.initialize(global_position, p_text, p_color)
 	get_tree().current_scene.add_child(new_text)
+
+func set_current_hp(value: int) -> void:
+	current_hp = value
