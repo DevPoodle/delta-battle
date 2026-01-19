@@ -148,10 +148,6 @@ func faint() -> void:
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
-func set_current_hp(p_value: int) -> void:
-	current_hp = p_value
-	health_changed.emit(current_hp)
-
 func revive() -> void:
 	if current_hp < max_hp * HP_FRACTION_MIN_REVIVED:
 		current_hp = ceili(max_hp * HP_FRACTION_MIN_REVIVED)
