@@ -16,6 +16,8 @@ func _ready() -> void:
 		total_money += monster.money_dropped
 		total_xp += monster.xp_bled
 	
+	Global.tp = 0.0
+	
 	Sounds.play("snd_impact", 0.7)
 	Sounds.play("snd_weaponpull_fast", 0.8)
 	Sounds.set_music("battle", 0.7)

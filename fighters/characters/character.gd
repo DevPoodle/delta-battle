@@ -144,12 +144,12 @@ func defend() -> void:
 
 func faint() -> void:
 	alive = false
-	current_hp = -1 * HP_FRACTION_DOWNED * max_hp
+	current_hp = round(-1 * HP_FRACTION_DOWNED * max_hp)
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
-func set_current_hp(value: int) -> void:
-	current_hp = value
+func set_current_hp(p_value: int) -> void:
+	current_hp = p_value
 	health_changed.emit(current_hp)
 
 func revive() -> void:

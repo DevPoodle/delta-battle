@@ -28,5 +28,5 @@ func create_text(p_text: String, p_color: Color) -> void:
 	new_text.initialize(global_position, p_text, p_color)
 	get_tree().current_scene.add_child(new_text)
 
-func set_current_hp(value: int) -> void:
-	current_hp = value
+func set_current_hp(p_value: int) -> void:
+	current_hp = p_value
