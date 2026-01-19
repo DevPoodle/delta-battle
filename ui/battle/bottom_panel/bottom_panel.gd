@@ -28,7 +28,7 @@ var context := CONTEXT.BATTLE:
 			CONTEXT.BATTLE:
 				for character: Character in Global.characters:
 					if !character.alive:
-						character.heal(ceili(character.max_hp * 0.13))
+						character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
 					if character.defending and character.alive:
 						character.do_animation(Character.Animations.IDLE)
 						character.defending = false
@@ -215,7 +215,7 @@ func next_char() -> void:
 	if context == CONTEXT.ACTION:
 		for character: Character in Global.characters:
 			if !character.alive:
-				character.heal(ceili(character.max_hp * 0.13))
+				character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
 	
 	var next_character := current_char + 1
 	var valid_char := false

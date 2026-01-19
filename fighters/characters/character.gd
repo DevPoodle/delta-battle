@@ -3,6 +3,10 @@ class_name Character
 
 const CHECK_ACT := preload("res://fighters/characters/acts/check/check.tres")
 
+const HP_FRACTION_DOWNED := 1.0 / 2.0
+const HP_FRACTION_DOWNED_REGEN := 1.0 / 8.0
+const HP_FRACTION_MIN_REVIVED := 1.0 / 6.0
+
 enum Animations {
 	IDLE, PREP_ATTACK, PREP_ACT, PREP_ITEM, PREP_SPARE, ATTACK, ACT, USE_ITEM, SPARE, DEFEND, FAINT, REVIVE
 }
@@ -140,6 +144,7 @@ func defend() -> void:
 
 func faint() -> void:
 	alive = false
+	current_hp = -1 * HP_FRACTION_DOWNED * max_hp
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
@@ -148,8 +153,8 @@ func set_current_hp(value: int) -> void:
 	health_changed.emit(current_hp)
 
 func revive() -> void:
-	if current_hp < max_hp * 0.17:
-		current_hp = ceili(max_hp * 0.17)
+	if current_hp < max_hp * HP_FRACTION_MIN_REVIVED:
+		current_hp = ceili(max_hp * HP_FRACTION_MIN_REVIVED)
 	alive = true
 	do_animation(Animations.REVIVE)
 
