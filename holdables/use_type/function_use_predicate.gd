@@ -1,5 +1,5 @@
 extends ItemUsePredicate
-class_name CustomUsePredicate
+class_name FunctionUsePredicate
 
 ##Function must return a signal that the battle will use to advance the turn.
 @export var callable : Callable = func(user : Character, used_on : Character): return

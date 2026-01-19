@@ -14,7 +14,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if graze_timer > 0.0:
 		graze_timer -= delta
-		$TPIndicator.modulate.a = maxf(0.0, 30.0 * graze_timer / 6.0 - 0.2)
+		var graze_amount : float = maxf(0.0, 30.0 * graze_timer / 6.0 - 0.2)
+		$TPIndicator.modulate = Color.WHITE.lerp(soul.get_base_color(), clamp(graze_amount, 0.0, 0.3))
+		$TPIndicator.modulate.a = graze_amount
 	for pellet: Pellet in soul.grazed_pellets:
 		graze(pellet, delta)
 
@@ -38,7 +40,7 @@ func graze(p_pellet: Pellet, p_delta: float) -> void:
 		graze_timer = 1.0 / 3.0
 
 func _on_tp_range_area_entered(p_area: Area2D) -> void:
-	if p_area is Pellet:
+	if p_area is Pellet && !(p_area is JusticePellet):
 		soul.grazed_pellets.append(p_area)
 		graze(p_area, 1.0 / Engine.max_fps)
 

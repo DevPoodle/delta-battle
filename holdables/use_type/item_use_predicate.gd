@@ -4,6 +4,7 @@ class_name ItemUsePredicate
 var item : Item
 @export var remove_after_use : bool = false
 
+@warning_ignore("unused_parameter")
 func use_item(user : Character, used_on : Character) -> Signal:
 	display_use_text(user)
 	await Global.text_finished

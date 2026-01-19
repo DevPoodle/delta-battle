@@ -39,7 +39,7 @@ func get_files_recursive(p_directory: String) -> PackedStringArray:
 
 func play(p_sound: String, p_volume := 1.0) -> void:
 	if !sounds.has(p_sound):
-		printerr("Error in sounds.gd: Attempt to play sound, \"" + p_sound + "\", but no such sound exists.")
+		#printerr("Error in sounds.gd: Attempt to play sound, \"" + p_sound + "\", but no such sound exists.")
 		return
 	var audio_player := sounds[p_sound]
 	audio_player.volume_linear = p_volume

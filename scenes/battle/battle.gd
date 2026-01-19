@@ -1,10 +1,13 @@
 extends Node2D
 
+@onready var soul_cage: StaticBody2D = $SoulCage
+
 var in_attack := false
 var turn_timer := 0.0
 
 var total_money := 0
 var total_xp := 0
+var money_multiplier := 0.0
 
 func _ready() -> void:
 	for item in Global.items:
@@ -18,6 +21,10 @@ func _ready() -> void:
 	for monster: Monster in Global.monsters:
 		total_money += monster.money_dropped
 		total_xp += monster.xp_bled
+		money_multiplier += monster.get_value_from_stat(AbstractFighter.Stats.MONEY_MULTIPLIER)
+	
+	for player: Character in Global.characters:
+		money_multiplier += player.get_value_from_stat(AbstractFighter.Stats.MONEY_MULTIPLIER)
 	
 	Sounds.play("snd_impact", 0.7)
 	Sounds.play("snd_weaponpull_fast", 0.8)
@@ -120,7 +127,7 @@ func monster_killed(p_monster: Monster, p_context: Global.DefeatContext) -> void
 		$BottomPanel/AttackTiming.focused = false
 		for character: Character in Global.characters:
 			character.do_animation(Character.Animations.IDLE)
-		var money := total_money * Global.chapter / 4
+		var money := (total_money * Global.chapter / 4) * money_multiplier
 		Global.display_text.emit("  * You won!\n[color=#000]----[/color]Got %d EXP and %dD$." % [total_xp, money], true)
 		await Global.text_finished
 		Global.change_to_scene("res://scenes/menus/win_screen/win_screen.tscn")
