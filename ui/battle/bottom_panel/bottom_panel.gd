@@ -135,8 +135,13 @@ func undo_input() -> void:
 		CONTEXT.CHAR_MENU:
 			if current_char == 0:
 				return
-			char_menus[current_char].deactivate()
-			current_char -= 1
+			for i in range(current_char - 1, -1, -1): #Get the previous alive character, or return if none exist
+				if Global.characters[i].alive:
+					char_menus[current_char].deactivate()
+					current_char = i
+					break
+				if i == 0:
+					return
 			if actions[current_char].what == Global.ITEM:
 				$ItemSelect.show_item(actions[current_char].specific, true)
 			elif actions[current_char].what == Global.ACT:
