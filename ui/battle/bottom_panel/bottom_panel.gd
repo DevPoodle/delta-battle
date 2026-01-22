@@ -25,24 +25,7 @@ var context := CONTEXT.BATTLE:
 				for character: Character in Global.characters:
 					if character.alive and !character.defending:
 						character.do_animation(Character.Animations.IDLE)
-			CONTEXT.BATTLE:
-				for character: Character in Global.characters:
-					if !character.alive:
-						character.heal(ceili(character.max_hp * 0.13))
-					if character.defending and character.alive:
-						character.do_animation(Character.Animations.IDLE)
-						character.defending = false
-				for char_menu: CharMenu in char_menus:
-					char_menu.deconfirm_action()
-				var i := 0
-				while i < Global.items.size():
-					if Global.items[i] == null:
-						Global.items.remove_at(i)
-					else:
-						i += 1
-				$ItemSelect.clear_items()
-				for item: Item in Global.items:
-					$ItemSelect.add_item(item.name, item.short_description)
+			#CONTEXT.BATTLE:
 		context = p_context
 		match context:
 			CONTEXT.BATTLE:
@@ -152,8 +135,13 @@ func undo_input() -> void:
 		CONTEXT.CHAR_MENU:
 			if current_char == 0:
 				return
-			char_menus[current_char].deactivate()
-			current_char -= 1
+			for i in range(current_char - 1, -1, -1): #Get the previous alive character, or return if none exist
+				if Global.characters[i].alive:
+					char_menus[current_char].deactivate()
+					current_char = i
+					break
+				if i == 0:
+					return
 			if actions[current_char].what == Global.ITEM:
 				$ItemSelect.show_item(actions[current_char].specific, true)
 			elif actions[current_char].what == Global.ACT:
@@ -211,11 +199,31 @@ func queue_character_action() -> void:
 			Global.tp += 40 * Global.tp_coefficient
 			next_char()
 
+func start_turn() -> void:
+	for character: Character in Global.characters:
+		if !character.alive:
+			character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
+		if character.defending and character.alive:
+			character.do_animation(Character.Animations.IDLE)
+			character.defending = false
+	for char_menu: CharMenu in char_menus:
+		char_menu.deconfirm_action()
+	var i := 0
+	while i < Global.items.size():
+		if Global.items[i] == null:
+			Global.items.remove_at(i)
+		else:
+			i += 1
+	$ItemSelect.clear_items()
+	for item: Item in Global.items:
+		$ItemSelect.add_item(item.name, item.short_description)
+	next_char()
+
 func next_char() -> void:
 	if context == CONTEXT.ACTION:
 		for character: Character in Global.characters:
 			if !character.alive:
-				character.heal(ceili(character.max_hp * 0.13))
+				character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
 	
 	var next_character := current_char + 1
 	var valid_char := false

@@ -5,7 +5,10 @@ signal health_changed(p_new_health: int)
 
 @export var title := ""
 
-@export var current_hp := 100
+@export var current_hp := 100:
+	set(p_value):
+		current_hp = p_value
+		health_changed.emit(current_hp)
 @export var max_hp := 100
 @export var strength := 0:
 	get():

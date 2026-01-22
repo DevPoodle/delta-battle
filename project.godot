@@ -45,6 +45,10 @@ window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[dotnet]
+
+project/assembly_name="Delta Battle"
+
 [gui]
 
 theme/custom="uid://tefd5wwqiati"

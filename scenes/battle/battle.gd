@@ -16,6 +16,8 @@ func _ready() -> void:
 		total_money += monster.money_dropped
 		total_xp += monster.xp_bled
 	
+	Global.tp = 0.0
+	
 	Sounds.play("snd_impact", 0.7)
 	Sounds.play("snd_weaponpull_fast", 0.8)
 	Sounds.set_music("battle", 0.7)
@@ -83,7 +85,7 @@ func end_attack(p_continue_battle := true) -> void:
 		$BottomPanel.current_char = -1
 		for char_menu: CharMenu in $BottomPanel.char_menus:
 			char_menu.selected_item = 0
-		$BottomPanel.next_char()
+		$BottomPanel.start_turn()
 		Global.display_text.emit(Global.get_idle_line(), false)
 
 func play_heart_animation() -> void:
