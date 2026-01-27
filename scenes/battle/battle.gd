@@ -1,12 +1,18 @@
 extends Node2D
 
+@onready var soul_cage: StaticBody2D = $SoulCage
+
 var in_attack := false
 var turn_timer := 0.0
 
 var total_money := 0
 var total_xp := 0
+var money_multiplier := 0.0
 
 func _ready() -> void:
+	for item in Global.items:
+		if item.usePredicate.item == null:
+			item.usePredicate.item = item
 	set_positions($Characters, Global.characters, Vector2(108.0, 0.0))
 	set_positions($Monsters, Global.monsters, Vector2(640.0 - 108.0, 0.0))
 	Global.display_text.emit(Global.get_opening_line(), false)
@@ -15,6 +21,10 @@ func _ready() -> void:
 	for monster: Monster in Global.monsters:
 		total_money += monster.money_dropped
 		total_xp += monster.xp_bled
+		money_multiplier += monster.get_value_from_stat(AbstractFighter.Stats.MONEY_MULTIPLIER)
+	
+	for player: Character in Global.characters:
+		money_multiplier += player.get_value_from_stat(AbstractFighter.Stats.MONEY_MULTIPLIER)
 	
 	Global.tp = 0.0
 	
@@ -119,7 +129,7 @@ func monster_killed(p_monster: Monster, p_context: Global.DefeatContext) -> void
 		$BottomPanel/AttackTiming.focused = false
 		for character: Character in Global.characters:
 			character.do_animation(Character.Animations.IDLE)
-		var money := total_money * Global.chapter / 4
+		var money := (total_money * Global.chapter / 4) * money_multiplier
 		Global.display_text.emit("  * You won!\n[color=#000]----[/color]Got %d EXP and %dD$." % [total_xp, money], true)
 		await Global.text_finished
 		Global.change_to_scene("res://scenes/menus/win_screen/win_screen.tscn")

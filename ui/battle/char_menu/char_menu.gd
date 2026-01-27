@@ -88,7 +88,7 @@ func set_current_health(p_current_health: int) -> void:
 func set_from_character(character: Character) -> void:
 	$Stats/Name.text = character.title
 	current_hp = character.current_hp
-	max_hp = character.max_hp
+	max_hp = character.get_max_hp()
 	main_color = character.main_color
 	$Stats/Icon.texture = character.icon
 	$Stats/ActionIcon.modulate = character.icon_color

@@ -25,7 +25,6 @@ var context := CONTEXT.BATTLE:
 				for character: Character in Global.characters:
 					if character.alive and !character.defending:
 						character.do_animation(Character.Animations.IDLE)
-			#CONTEXT.BATTLE:
 		context = p_context
 		match context:
 			CONTEXT.BATTLE:
@@ -202,7 +201,7 @@ func queue_character_action() -> void:
 func start_turn() -> void:
 	for character: Character in Global.characters:
 		if !character.alive:
-			character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
+			character.heal(ceili(character.get_max_hp() * character.HP_FRACTION_DOWNED_REGEN))
 		if character.defending and character.alive:
 			character.do_animation(Character.Animations.IDLE)
 			character.defending = false
@@ -223,7 +222,7 @@ func next_char() -> void:
 	if context == CONTEXT.ACTION:
 		for character: Character in Global.characters:
 			if !character.alive:
-				character.heal(ceili(character.max_hp * character.HP_FRACTION_DOWNED_REGEN))
+				character.heal(ceili(character.get_max_hp() * character.HP_FRACTION_DOWNED_REGEN))
 	
 	var next_character := current_char + 1
 	var valid_char := false

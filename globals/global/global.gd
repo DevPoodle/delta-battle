@@ -26,6 +26,7 @@ var displaying_text := false
 var characters: Array[Character] = []
 var monsters: Array[Monster] = []
 var items: Array[Item] = []
+var heartColor : Color = SoulType.RED.color
 
 # The current chapter number affects how much money is earned from a battle.
 var chapter := 2
@@ -97,3 +98,6 @@ func change_to_scene(p_scene_path: String, p_fade := true) -> void:
 
 func wait_time(p_time: float) -> Signal:
 	return get_tree().create_timer(p_time).timeout
+
+func setHeartColor(color : Color) -> void:
+	heartColor = color

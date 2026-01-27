@@ -19,6 +19,7 @@ script = ExtResource("2_i2ppl")
 damage = 8
 graze_points = 2
 time_points = 0.1
+shield_repelled = true
 metadata/_custom_type_script = "uid://l1dijweo3y2y"
 
 [node name="Sprite" type="Sprite2D" parent="BaseDroplet"]

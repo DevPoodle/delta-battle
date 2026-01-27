@@ -1,44 +1,35 @@
 extends CharacterBody2D
 class_name Soul
 
-const SPEED := 4.0 * 30.0 # 4 pixels per frame
-const SLOW_MULTIPLIER := 0.5
-
-@export var normalized_movement := false
-
+@onready var collision: CollisionPolygon2D = $Collision
+@onready var grazer: Area2D = $Grazer
 @export var heart: Sprite2D
+@export var behaviors : Array[SoulBehavior]
+
+var current_soul_type : SoulType
 
 var active := false:
 	set(p_active):
 		active = p_active
 		grazed_pellets.clear()
+		for beh in behaviors:
+			if p_active:
+				beh.turn_start()
+			else:
+				beh.turn_end()
 var grazed_pellets: Array[Pellet] = []
-var graze_timer := 0.0
 var invulnerable := false
-	
+
+func _ready() -> void:
+	assign_heart_properties(SoulType.YELLOW)
+
+func _process(delta: float) -> void:
+	for i in behaviors:
+		i.tick(delta)
+
 func _physics_process(delta: float) -> void:
-	if graze_timer > 0.0:
-		graze_timer -= delta
-		$TPIndicator.modulate.a = maxf(0.0, 30.0 * graze_timer / 6.0 - 0.2)
-	if !active:
-		return
-	
-	var input := Vector2(
-		int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")),
-		int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
-	)
-	
-	if normalized_movement:
-		input = input.normalized()
-	
-	velocity = Vector2.ZERO
-	if input != Vector2.ZERO:
-		velocity = SPEED * input
-		if Input.is_action_pressed("cancel"):
-			velocity *= 0.5
-	move_and_slide()
-	for pellet: Pellet in grazed_pellets:
-		graze(pellet, delta)
+	for i in behaviors:
+		i.physics_tick(delta)
 
 func hurt(p_damage: int) -> void:
 	if invulnerable:
@@ -50,36 +41,38 @@ func invulnerable_state()-> void:
 	invulnerable = true
 	var tween = get_tree().create_tween()
 	tween.set_loops(5)
-	tween.tween_property(heart, "modulate", Color(0.5, 0.0, 0.0, 1.0), 0.0)
+	tween.tween_property(heart, "modulate", current_soul_type.get_secondary_color(), 0.0)
 	tween.tween_interval(0.1)
-	tween.tween_property(heart, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.0)
+	tween.tween_property(heart, "modulate", current_soul_type.color, 0.0)
 	tween.tween_interval(0.2)
 	await tween.finished
 	invulnerable = false
 
-func _on_tp_range_area_entered(p_area: Area2D) -> void:
-	grazed_pellets.append(p_area)
-	graze(p_area, 1.0 / Engine.max_fps)
+func change_color(soulType : SoulType) -> void:
+	current_soul_type = soulType
+	heart.modulate = current_soul_type.color
+	Global.setHeartColor(current_soul_type.color)
 
-func _on_tp_range_area_exited(p_area: Area2D) -> void:
-	grazed_pellets.erase(p_area)
+func get_base_color() -> Color:
+	return current_soul_type.color
 
-func graze(p_pellet: Pellet, p_delta: float) -> void:
-	if invulnerable:
-		return
-	if p_pellet.grazed:
-		Global.tp += 30.0 * p_delta * p_pellet.graze_points * Global.tp_coefficient / 20.0
-		if get_parent().turn_timer >= 1.0 / 3.0:
-			get_parent().turn_timer -= 30.0 * p_delta * p_pellet.time_points / 20.0
-		if graze_timer >= 0.0 and graze_timer < 4.0 / 30.0:
-			graze_timer = 3.0 / 30.0
-		elif graze_timer < 0.0:
-			graze_timer = 2.0 / 30.0
-	else:
-		p_pellet.grazed = true
-		Global.tp += p_pellet.graze_points
-		if get_parent().turn_timer >= 1.0 / 3.0:
-			get_parent().turn_timer -= p_pellet.time_points
-		Sounds.play("snd_graze", 0.7)
-		graze_timer = 1.0 / 3.0
-		
+func get_secondary_color() -> Color:
+	return current_soul_type.get_secondary_color()
+
+func assign_heart_properties(soulType : SoulType) -> void:
+	change_color(soulType)
+	for i in behaviors:
+		i.end()
+		i.queue_free()
+	behaviors.clear()
+	for i in soulType.behaviors:
+		var newBehavior := Node.new()
+		newBehavior.set_script(i)
+		newBehavior.soul = self
+		add_child(newBehavior)
+		behaviors.append(newBehavior)
+		newBehavior.start()
+
+func visually_rotate(deg : float) -> void:
+	collision.rotation_degrees = deg
+	heart.rotation_degrees = deg

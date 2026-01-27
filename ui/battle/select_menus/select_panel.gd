@@ -16,6 +16,7 @@ func set_select(p_selected: bool) -> void:
 		if !heart_path:
 			return
 		heart = get_node_or_null(heart_path)
+	heart.modulate = Global.heartColor
 	heart.visible = p_selected
 
 func set_title(p_title: String) -> void:

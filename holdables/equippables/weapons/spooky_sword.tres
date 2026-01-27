@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Equippable" load_steps=5 format=3 uid="uid://diunmk8v3dbjq"]
+
+[ext_resource type="Script" uid="uid://cp643of2mfab3" path="res://holdables/equippables/equippable_attribute.gd" id="1_o7vkq"]
+[ext_resource type="Script" uid="uid://cbtfclefu13k7" path="res://holdables/equippables/equippable.gd" id="1_uapmk"]
+[ext_resource type="Script" uid="uid://42n4vg6qs1fv" path="res://holdables/light_world_form.gd" id="2_oc853"]
+
+[sub_resource type="Resource" id="Resource_r4gyq"]
+script = ExtResource("2_oc853")
+name = "Halloween Pencil"
+description = "Orange with black bats on it."
+metadata/_custom_type_script = "uid://42n4vg6qs1fv"
+
+[resource]
+script = ExtResource("1_uapmk")
+category = 0
+fighter_stat_modifiers = Dictionary[int, int]({
+2: 2
+})
+attributes = Dictionary[ExtResource("1_o7vkq"), int]({})
+fighter_equip_reactions = Dictionary[String, String]({})
+name = "Spookysword"
+short_description = ""
+long_description = "A black-and-orange sword with a bat hilt."
+sell_value = 100
+inventory_tab = 3
+light_world_form = SubResource("Resource_r4gyq")
+metadata/_custom_type_script = "uid://cbtfclefu13k7"

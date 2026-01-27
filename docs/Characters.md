@@ -10,14 +10,20 @@ To create a new character, you can simply create a new scene that inherits from 
 
 Almost all setup for the Character will happen in it's exported properties. Here, you should set quite a few things:
 	1. Title: This is the character's name.
-	2. Max HP: Self-explanatory. Make sure to set the current HP to the same value, so that the character starts at max.
-	3. Strength: This is the character's attack without any weapons or armor.
-	4. Defense: This is the character's defense without any weapons or armor.
-	4. Magic: This is the character's magic without any weapons or armor.
-	5. Uses Magic: This decides whether the character uses magic or uses acts. (The magic system isn't well implemented yet, so there'll be a lot more manual work in setting it up)
-	6. Main Color and Icon Color: The main color is the most common color associated with that character. The icon color is what color the character's icon will use. Typically, the icon color is a slightly darker and more saturated version of the main color.
-	7. Icon: This is the icon that will appear next to the character's name in battle. It should be a 32x32 texture (although it doesn't have to be).
-	8. Main Sprite: This is a reference to the main sprite of your character. The reason you have to set this, is so that the default character script can handle shaking the character during animations and changing their modulation.
+	2. Uses Magic: This decides whether the character uses magic or uses acts. (The magic system isn't well implemented yet, so there'll be a lot more manual work in setting it up)
+	3. Main Color and Icon Color: The main color is the most common color associated with that character. The icon color is what color the character's icon will use. Typically, the icon color is a slightly darker and more saturated version of the main color.
+	4. Icon: This is the icon that will appear next to the character's name in battle. It should be a 32x32 texture (although it doesn't have to be).
+	5. Main Sprite: This is a reference to the main sprite of your character. The reason you have to set this, is so that the default character script can handle shaking the character during animations and changing their modulation.
+
+# Setting up the chaqracter's stats
+
+All characters have a field called "Base Fighter Stats". This will be where you set values like:
+	1. Max HP (HP will be set automatically, you do not need to set it manually).
+	2. Attack
+	3. Defense
+	4. Magic
+	5. Money Multiplier
+Set any of these values that you wish, any value that's not set will be 0, except Max HP which is 100.
 
 # Creating a character script
 

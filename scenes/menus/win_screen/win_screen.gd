@@ -1,6 +1,6 @@
 extends Node2D
 
-var dark_candy := preload("res://items/dark_candy.tres")
+var dark_candy := preload("res://holdables/items/dark_candy.tres")
 
 func _ready() -> void:
 	$Play.grab_focus()

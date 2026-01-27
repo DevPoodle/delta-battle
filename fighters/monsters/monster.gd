@@ -15,9 +15,7 @@ enum Animations {
 @export_multiline var opening_line_singular := "  * An enemy approaches."
 @export_multiline var opening_line_plural := "  * Multiple enemies approach."
 
-@export_node_path("Sprite2D") var main_sprite: NodePath
-var sprite: Sprite2D
-var mat: ShaderMaterial
+
 var hurting := false
 var dying := false
 var mercy_percent := 0.0
@@ -30,12 +28,7 @@ signal exit_finished
 signal attack_finished
 
 func _ready() -> void:
-	if !main_sprite:
-		return
-	sprite = get_node(main_sprite)
-	mat = ShaderMaterial.new()
-	mat.shader = preload("res://fighters/monsters/generic_monster.gdshader")
-	sprite.material = mat
+	create_shader("generic_monster")
 
 func _process(p_delta: float) -> void:
 	if shake > 0.0:
@@ -81,7 +74,7 @@ func damage_or_die_animation() -> void:
 		queue_free()
 
 func take_damage(p_character: Character, p_damage: int) -> void:
-	current_hp -= (p_damage - defense * 3)
+	current_hp -= (p_damage - get_defense() * 3)
 	Global.tp += 5 * Global.tp_coefficient
 	create_text(str(p_damage) if p_damage > 0 else "MISS", p_character.icon_color)
 	if current_hp < 0:

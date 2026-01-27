@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cosoh16n65vwr" path="res://scenes/battle/battle.gd" id="1_0yh6x"]
 [ext_resource type="PackedScene" uid="uid://dh7u53yj0xavd" path="res://ui/battle/bottom_panel/bottom_panel.tscn" id="1_7gynk"]
 [ext_resource type="PackedScene" uid="uid://b3uxp6uapsy5m" path="res://ui/battle/soul_cage/soul_cage.tscn" id="2_xd4uy"]
-[ext_resource type="PackedScene" uid="uid://daa26yfs5qdsb" path="res://soul/soul.tscn" id="3_0yh6x"]
+[ext_resource type="PackedScene" uid="uid://daa26yfs5qdsb" path="res://soul/Soul.tscn" id="3_0yh6x"]
 [ext_resource type="PackedScene" uid="uid://siv76bpw5pri" path="res://ui/battle/tp_bar/tp_bar.tscn" id="5_h0kxc"]
 
 [node name="Battle" type="Node2D"]
