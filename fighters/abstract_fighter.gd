@@ -20,7 +20,10 @@ signal health_changed(p_new_health: int)
 
 @export var title := ""
 
-var current_hp := 0
+var current_hp := 0:
+	set(p_value):
+		current_hp = p_value
+		health_changed.emit(current_hp)
 @export var base_fighter_stats : Dictionary[Stats, int] = {}:
 		set(value):
 			current_hp = value.get_or_add(Stats.MAX_HP, 0)

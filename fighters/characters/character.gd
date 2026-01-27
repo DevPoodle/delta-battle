@@ -3,6 +3,10 @@ class_name Character
 
 const CHECK_ACT := preload("res://fighters/characters/acts/check/check.tres")
 
+const HP_FRACTION_DOWNED := 1.0 / 2.0
+const HP_FRACTION_DOWNED_REGEN := 1.0 / 8.0
+const HP_FRACTION_MIN_REVIVED := 1.0 / 6.0
+
 enum Animations {
 	IDLE, PREP_ATTACK, PREP_ACT, PREP_ITEM, PREP_SPARE, ATTACK, ACT, USE_ITEM, SPARE, DEFEND, FAINT, REVIVE
 }
@@ -126,12 +130,13 @@ func defend() -> void:
 
 func faint() -> void:
 	alive = false
+	current_hp = round(-1 * HP_FRACTION_DOWNED * max_hp)
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
 func revive() -> void:
-	if current_hp < get_value_from_stat(Stats.MAX_HP) * 0.17:
-		current_hp = ceili(get_max_hp() * 0.17)
+	if current_hp < get_value_from_stat(Stats.MAX_HP) * HP_FRACTION_MIN_REVIVED:
+		current_hp = ceili(get_max_hp() * HP_FRACTION_MIN_REVIVED)
 	alive = true
 	do_animation(Animations.REVIVE)
 
@@ -139,7 +144,6 @@ func hurt(p_damage: int) -> void:
 	shake_sprite(4.0)
 	p_damage = int(maxi(1, p_damage - 3 * get_defense()) * (1.0 if !defending else 2.0 / 3.0))
 	current_hp -= p_damage
-	health_changed.emit(current_hp)
 	create_text(str(p_damage), Color.WHITE)
 	Sounds.play("snd_hurt1")
 	if current_hp <= 0:
@@ -154,8 +158,7 @@ func heal(p_amount: int) -> void:
 		current_hp = get_max_hp()
 		create_text("MAX", Global.GREEN)
 	else:
-		create_text(str(p_amount), icon_color)
-	health_changed.emit(current_hp)
+		create_text(str(p_amount), Global.GREEN)
 
 func do_act(p_monster: Monster, p_act: int) -> void:
 	if p_monster == null:
