@@ -130,7 +130,7 @@ func defend() -> void:
 
 func faint() -> void:
 	alive = false
-	current_hp = round(-1 * HP_FRACTION_DOWNED * max_hp)
+	current_hp = round(-1 * HP_FRACTION_DOWNED * get_max_hp())
 	await do_animation(Animations.FAINT)
 	faint_finished.emit()
 
