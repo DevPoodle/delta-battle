@@ -42,7 +42,9 @@ var focused := false:
 		focused = p_focused
 		selected_item = selected_item
 		can_spare = false
-		for monster: Monster in Global.monsters:
+		if Global.current_battle==null:
+			return
+		for monster: Monster in Global.current_battle.monsters:
 			if monster != null and monster.mercy_percent >= 1.0:
 				can_spare = true
 				return

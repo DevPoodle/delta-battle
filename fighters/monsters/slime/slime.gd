@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 func start_attack() -> float:
 	var another_slime := false
-	for monster: Monster in Global.monsters:
+	for monster: Monster in Global.current_battle.monsters:
 		if monster == self:
 			continue
 		if monster is Slime:

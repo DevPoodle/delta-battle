@@ -11,7 +11,6 @@ class_name SoulType
 func _init(heart_color : Color) -> void:
 	color = heart_color
 
-
 ## Adds the behavior using the absolute path of the script.
 func addBehaviorAbsolute(node_path : String) -> SoulType:
 	behaviors.append(load(node_path))
@@ -21,11 +20,13 @@ func addBehaviorAbsolute(node_path : String) -> SoulType:
 func addBehavior(node_name : String) -> SoulType:
 	addBehaviorAbsolute("res://soul/behaviors/" + node_name + ".gd")
 	return self
-##Set wether the soul is a monster soul.
+
+## Set wether the soul is a monster soul.
 func set_monster(value : bool = true) -> SoulType:
 	is_monster_soul = value
 	return self
-##Returns the color the soul flashes when it is damaged.
+
+## Returns the color the soul flashes when it is damaged.
 func get_secondary_color() -> Color:
 	var final_color : Color = color
 	final_color.r *= 0.5
@@ -33,7 +34,7 @@ func get_secondary_color() -> Color:
 	final_color.b *= 0.5
 	return final_color
 
-##Creates a soul type instance with the default movement.
+## Creates a soul type instance with the default movement.
 static func basic_moving_soul(p_color : Color) -> SoulType:
 	return SoulType.new(p_color).addBehavior("movement/soul_move")
 

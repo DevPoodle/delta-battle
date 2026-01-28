@@ -12,12 +12,11 @@ func initialize(p_title: String, p_description := "", p_tp := 0.0) -> void:
 func set_select(p_selected: bool) -> void:
 	if !heart:
 		return
-	heart.modulate = Global.heartColor
 	heart.visible = p_selected
 	update_modulation()
 
 func update_modulation() -> void:
-	if tp > Global.tp:
+	if tp > Global.current_battle.tp:
 		modulate = Color("#808080")
 	else:
 		modulate = Color.WHITE

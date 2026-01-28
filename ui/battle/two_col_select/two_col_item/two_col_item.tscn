@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg6dv22mpqmch"]
+[gd_scene load_steps=4 format=3 uid="uid://cg6dv22mpqmch"]
 
 [ext_resource type="Script" uid="uid://beyomtofx8ctf" path="res://ui/battle/two_col_select/two_col_item/two_col_item.gd" id="1_yr8f7"]
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="2_t0k4i"]
+[ext_resource type="Script" uid="uid://gawjw4foing4" path="res://ui/menu_soul.gd" id="3_xnbdi"]
 
 [node name="TwoColItem" type="Control"]
 custom_minimum_size = Vector2(237, 30)
@@ -15,6 +16,7 @@ title_path = NodePath("Title")
 visible = false
 position = Vector2(21, 16)
 texture = ExtResource("2_t0k4i")
+script = ExtResource("3_xnbdi")
 
 [node name="Title" type="Label" parent="."]
 custom_minimum_size = Vector2(150, 32)

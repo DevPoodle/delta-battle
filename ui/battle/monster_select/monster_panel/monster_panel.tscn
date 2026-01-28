@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cte7khih2kb45"]
+[gd_scene load_steps=9 format=3 uid="uid://cte7khih2kb45"]
 
 [ext_resource type="Script" uid="uid://c647nxwp6djnn" path="res://ui/battle/monster_select/monster_panel/monster_panel.gd" id="1_fyfih"]
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="1_layat"]
+[ext_resource type="Script" uid="uid://gawjw4foing4" path="res://ui/menu_soul.gd" id="3_7eb5v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_layat"]
 bg_color = Color(0.501961, 0, 0, 1)
@@ -42,6 +43,7 @@ clip_text = true
 visible = false
 position = Vector2(63, 17)
 texture = ExtResource("1_layat")
+script = ExtResource("3_7eb5v")
 
 [node name="HPBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(81, 16)

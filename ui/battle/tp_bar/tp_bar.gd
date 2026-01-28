@@ -7,8 +7,8 @@ var desired_value := 0.0
 var current_value := 0.0
 var foam := 0.0
 
-func _ready() -> void:
-	Global.tp_changed.connect(set_tp)
+#func _ready() -> void:
+	#Global.current_battle.tp_changed.connect(set_tp)
 
 func _process(_p_delta: float) -> void:
 	$Fill.material.set_shader_parameter("fill", current_value / 250.0)
@@ -22,7 +22,7 @@ func _process(_p_delta: float) -> void:
 		$Number.text = str(floori(current_value / 2.5))
 
 func set_tp() -> void:
-	desired_value = Global.tp
+	desired_value = Global.current_battle.tp
 	animate_bar(desired_value < current_value)
 
 func animate_bar(p_is_decreasing : bool) -> void:

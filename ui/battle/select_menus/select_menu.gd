@@ -1,6 +1,7 @@
 extends Node2D
 class_name SelectMenu
 
+@export var battle : Battle
 @export_range(1, 3) var columns := 1
 
 var focused := false:
@@ -50,6 +51,7 @@ func clear_items() -> void:
 func initialize_panels() -> void:
 	for item: SelectPanel in items:
 		item.set_select(false)
+		item.battle = battle
 	if !items.is_empty():
 		selected_item = 0
 

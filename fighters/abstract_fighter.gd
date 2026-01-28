@@ -31,6 +31,7 @@ var current_hp := 0:
 
 @export var weapon: Equippable
 @export var armors: Array[Equippable]
+@export var battle : Battle
 
 @export_node_path("Sprite2D") var main_sprite: NodePath
 var sprite: Sprite2D

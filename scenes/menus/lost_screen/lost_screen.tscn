@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://gvvlu8b17lwv"]
+[gd_scene load_steps=4 format=3 uid="uid://gvvlu8b17lwv"]
 
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="1_qeco5"]
 [ext_resource type="Script" uid="uid://cmx566l7n4rnj" path="res://scenes/menus/lost_screen/lost_screen.gd" id="1_yigqx"]
+[ext_resource type="Script" uid="uid://gawjw4foing4" path="res://ui/menu_soul.gd" id="3_ardh2"]
 
 [node name="LostScreen" type="Node2D"]
 script = ExtResource("1_yigqx")
@@ -42,10 +43,10 @@ theme_override_font_sizes/font_size = 48
 text = "GIVE UP"
 
 [node name="Heart" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
 position = Vector2(183, 274)
 scale = Vector2(2, 2)
 texture = ExtResource("1_qeco5")
+script = ExtResource("3_ardh2")
 
 [connection signal="focus_entered" from="Play" to="." method="_on_play_focus_entered"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]

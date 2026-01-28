@@ -1,73 +1,47 @@
 extends Resource
-class_name Util
+class_name Direction
 
-enum Direction {
-	NORTH,
-	NORTH_EAST,
-	EAST,
-	SOUTH_EAST,
-	SOUTH,
-	SOUTH_WEST,
-	WEST,
-	NORTH_WEST
-}
+static var DIRECTION_FROM_DEGREES : Dictionary[int, Direction] ={}
+static var DIRECTION_FROM_VECTOR : Dictionary[Vector2i, Direction] ={}
 
-static func getLeft(dir : Direction, diagonal : bool = false):
-	match dir:
-		Direction.NORTH:
-			if diagonal:
-				return Direction.NORTH_WEST
-			return Direction.WEST
-		Direction.SOUTH:
-			if diagonal:
-				return Direction.SOUTH_EAST
-			return Direction.EAST
-		Direction.EAST:
-			if diagonal:
-				return Direction.NORTH_EAST
-			return Direction.NORTH
-		Direction.WEST:
-			if diagonal:
-				return Direction.SOUTH_WEST
-			return Direction.SOUTH
-		Direction.NORTH_EAST:
-			return Direction.NORTH
-		Direction.SOUTH_EAST:
-			return Direction.EAST
-		Direction.NORTH_WEST:
-			return Direction.WEST
-		Direction.SOUTH_WEST:
-			return Direction.SOUTH
+@export var positive_degrees : int
+@export var negative_degrees : int
+@export var vector : Vector2i
 
-static func getOpposite(dir):
-	match dir:
-		Direction.NORTH:
-			return Direction.SOUTH
-		Direction.SOUTH:
-			return Direction.NORTH
-		Direction.EAST:
-			return Direction.WEST
-		Direction.WEST:
-			return Direction.EAST
-		Direction.NORTH_EAST:
-			return Direction.SOUTH_WEST
-		Direction.SOUTH_EAST:
-			return Direction.NORTH_WEST
-		Direction.NORTH_WEST:
-			return Direction.SOUTH_EAST
-		Direction.SOUTH_WEST:
-			return Direction.NORTH_EAST
+func _init(pos : int, neg : int, vec : Vector2i) -> void:
+	positive_degrees = pos
+	negative_degrees = neg
+	vector = vec
+	DIRECTION_FROM_DEGREES.set(positive_degrees, self)
+	DIRECTION_FROM_DEGREES.set(negative_degrees, self)
+	DIRECTION_FROM_VECTOR.set(vec, self)
 
-static func getRight(dir : Direction, diagonal : bool = false):
-	return getLeft(getOpposite(dir), diagonal)
+static var NORTH = Direction.new(270, -90, Vector2i.UP)
+static var NORTH_EAST = Direction.new(315, -45, Vector2i(1, -1))
+static var EAST = Direction.new(0, -360, Vector2i.RIGHT)
+static var SOUTH_EAST = Direction.new(45, -315, Vector2i(1, 1))
+static var SOUTH = Direction.new(90, 270, Vector2i.DOWN)
+static var SOUTH_WEST = Direction.new(135, -225, Vector2i(-1, 1))
+static var WEST = Direction.new(180, -180, Vector2i.LEFT)
+static var NORTH_WEST = Direction.new(225, -135, Vector2i(-1, -1))
 
-const ROTATION_DEGREES_FROM_DIR : Dictionary[Direction, float] ={
-	Direction.NORTH: 90,
-	Direction.SOUTH: 270,
-	Direction.EAST: 0,
-	Direction.WEST: 180,
-	Direction.NORTH_EAST: 45,
-	Direction.NORTH_WEST: 135,
-	Direction.SOUTH_EAST: 315,
-	Direction.SOUTH_WEST: 225
-}
+func left(diagonal : bool = false) -> Direction:
+	return right(diagonal).opposite()
+
+func opposite() -> Direction:
+	return get_direction_transmuted(180)
+
+func right(diagonal : bool = false) -> Direction:
+	var turn_amount : int = -90
+	if diagonal:
+		turn_amount = -45
+	return get_direction_transmuted(turn_amount)
+
+func get_direction_transmuted(p_degrees : int) -> Direction:
+	return DIRECTION_FROM_DEGREES.get((positive_degrees + p_degrees) % 360, DIRECTION_FROM_DEGREES.get((negative_degrees + p_degrees) % 360))
+
+static func from_degrees(p_degrees : int) -> Direction:
+	return DIRECTION_FROM_DEGREES.get(p_degrees)
+
+static func from_vector(p_vector : Vector2i) -> Direction:
+	return DIRECTION_FROM_VECTOR.get(p_vector)

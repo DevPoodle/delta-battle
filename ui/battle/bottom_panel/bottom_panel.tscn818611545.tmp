@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh7u53yj0xavd"]
+
+[ext_resource type="Script" uid="uid://dexbpui8jgwli" path="res://ui/battle/bottom_panel/bottom_panel.gd" id="1_11je6"]
+[ext_resource type="PackedScene" uid="uid://c5cnxltgwop68" path="res://ui/text_box/text_box.tscn" id="1_sd2ip"]
+[ext_resource type="PackedScene" uid="uid://bn7o6vx5tirfh" path="res://ui/battle/monster_select/monster_select.tscn" id="3_rmodj"]
+[ext_resource type="PackedScene" uid="uid://cw777caepj6ix" path="res://ui/battle/two_col_select/two_col_select.tscn" id="4_11je6"]
+[ext_resource type="PackedScene" uid="uid://c0460juclptxn" path="res://ui/battle/char_select/char_select.tscn" id="4_mnjw6"]
+[ext_resource type="PackedScene" uid="uid://blakyaaofibec" path="res://ui/battle/attack_timing/attack_timing.tscn" id="5_y2sg7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7giy0"]
+content_margin_top = 9.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11je6"]
+bg_color = Color(0.2, 0.12549, 0.2, 1)
+
+[node name="BottomPanel" type="Node2D"]
+script = ExtResource("1_11je6")
+
+[node name="TextBox" parent="." instance=ExtResource("1_sd2ip")]
+custom_minimum_size = Vector2(640, 115)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7giy0")
+bbcode_enabled = true
+text = "  * This is sample text"
+
+[node name="MonsterSelect" parent="." instance=ExtResource("3_rmodj")]
+visible = false
+
+[node name="CharSelect" parent="." instance=ExtResource("4_mnjw6")]
+visible = false
+
+[node name="ItemSelect" parent="." instance=ExtResource("4_11je6")]
+visible = false
+
+[node name="ActSelect" parent="." instance=ExtResource("4_11je6")]
+visible = false
+show_description = false
+
+[node name="MagicSelect" parent="." instance=ExtResource("4_11je6")]
+visible = false
+show_tp = true
+
+[node name="AttackTiming" parent="." instance=ExtResource("5_y2sg7")]
+visible = false
+
+[node name="BottomDivider" type="Panel" parent="."]
+offset_top = -3.0
+offset_right = 640.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_11je6")
+
+[node name="TopDivider" type="Panel" parent="."]
+offset_top = -39.0
+offset_right = 640.0
+offset_bottom = -37.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_11je6")
+
+[node name="Characters" type="HBoxContainer" parent="."]
+offset_top = -39.0
+offset_right = 640.0
+offset_bottom = -1.0
+alignment = 1

@@ -3,6 +3,8 @@ class_name Soul
 
 @onready var collision: CollisionPolygon2D = $Collision
 @onready var grazer: Area2D = $Grazer
+
+@export var battle : Battle
 @export var heart: Sprite2D
 @export var behaviors : Array[SoulBehavior]
 
@@ -12,16 +14,11 @@ var active := false:
 	set(p_active):
 		active = p_active
 		grazed_pellets.clear()
-		for beh in behaviors:
-			if p_active:
-				beh.turn_start()
-			else:
-				beh.turn_end()
 var grazed_pellets: Array[Pellet] = []
 var invulnerable := false
 
 func _ready() -> void:
-	assign_heart_properties(SoulType.YELLOW)
+	assign_heart_properties(SoulType.GREEN)
 
 func _process(delta: float) -> void:
 	for i in behaviors:
@@ -51,7 +48,7 @@ func invulnerable_state()-> void:
 func change_color(soulType : SoulType) -> void:
 	current_soul_type = soulType
 	heart.modulate = current_soul_type.color
-	Global.setHeartColor(current_soul_type.color)
+	Global.set_heart_state(current_soul_type)
 
 func get_base_color() -> Color:
 	return current_soul_type.color
@@ -60,6 +57,8 @@ func get_secondary_color() -> Color:
 	return current_soul_type.get_secondary_color()
 
 func assign_heart_properties(soulType : SoulType) -> void:
+	if soulType == current_soul_type:
+		return
 	change_color(soulType)
 	for i in behaviors:
 		i.end()
@@ -73,6 +72,11 @@ func assign_heart_properties(soulType : SoulType) -> void:
 		behaviors.append(newBehavior)
 		newBehavior.start()
 
-func visually_rotate(deg : float) -> void:
-	collision.rotation_degrees = deg
-	heart.rotation_degrees = deg
+static func heart_rotation(dir : Direction) -> float:
+	return dir.positive_degrees - 90
+
+func visually_rotate(dir : Direction) -> void:
+	var final_rotation : float = heart_rotation(dir)
+	collision.rotation_degrees = final_rotation
+	heart.rotation_degrees = final_rotation
+	Global.soulState.set_rotation(dir)

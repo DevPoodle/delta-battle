@@ -24,7 +24,7 @@ func graze(p_pellet: Pellet, p_delta: float) -> void:
 	if soul.invulnerable:
 		return
 	if p_pellet.grazed:
-		Global.tp += 30.0 * p_delta * p_pellet.graze_points * Global.tp_coefficient / 20.0
+		soul.battle.tp += 30.0 * p_delta * p_pellet.graze_points * soul.battle.tp_coefficient / 20.0
 		if get_parent().get_parent().turn_timer >= 1.0 / 3.0:
 			get_parent().get_parent().turn_timer -= 30.0 * p_delta * p_pellet.time_points / 20.0
 		if graze_timer >= 0.0 and graze_timer < 4.0 / 30.0:
@@ -33,7 +33,7 @@ func graze(p_pellet: Pellet, p_delta: float) -> void:
 			graze_timer = 2.0 / 30.0
 	else:
 		p_pellet.grazed = true
-		Global.tp += p_pellet.graze_points
+		soul.battle.tp += p_pellet.graze_points
 		if get_parent().get_parent().turn_timer >= 1.0 / 3.0:
 			get_parent().get_parent().turn_timer -= p_pellet.time_points
 		Sounds.play("snd_graze", 0.7)
