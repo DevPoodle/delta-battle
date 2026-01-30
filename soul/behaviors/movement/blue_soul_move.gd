@@ -26,6 +26,9 @@ func apply_speed(input : Vector2) -> Vector2:
 		sup += gravity * speed
 	return sup
 
+func get_move_rotation() -> AxisMoveType:
+	return AxisMoveType.ROTATED
+
 func should_ascend() -> bool:
 	return Input.is_action_pressed("up") && current_air_time > 0.0
 

@@ -47,7 +47,7 @@ func _ready() -> void:
 	for player: Character in Global.characters:
 		money_multiplier += player.get_value_from_stat(AbstractFighter.Stats.MONEY_MULTIPLIER)
 	
-	Global.tp = 0.0
+	tp = 0.0
 	
 	Sounds.play("snd_impact", 0.7)
 	Sounds.play("snd_weaponpull_fast", 0.8)
@@ -102,7 +102,7 @@ func start_attack() -> void:
 
 	
 	var alive_monsters: Array[Monster] = []
-	for monster: Monster in Global.current_battle.monsters:
+	for monster: Monster in monsters:
 		if monster != null:
 			alive_monsters.append(monster)
 	if alive_monsters.is_empty():
@@ -112,7 +112,7 @@ func start_attack() -> void:
 	in_attack = true
 
 func end_attack(p_continue_battle := true) -> void:
-	for monster: Monster in Global.current_battle.monsters:
+	for monster: Monster in monsters:
 		if monster != null:
 			monster.end_attack()
 	$Soul.active = false

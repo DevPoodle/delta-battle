@@ -18,7 +18,7 @@ var grazed_pellets: Array[Pellet] = []
 var invulnerable := false
 
 func _ready() -> void:
-	assign_heart_properties(SoulType.GREEN)
+	assign_heart_properties(SoulType.PURPLE)
 
 func _process(delta: float) -> void:
 	for i in behaviors:

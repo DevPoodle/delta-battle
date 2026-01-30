@@ -75,12 +75,8 @@ func damage_or_die_animation() -> void:
 
 func take_damage(p_character: Character, p_damage: int) -> void:
 	current_hp -= (p_damage - get_defense() * 3)
-<<<<<<< Updated upstream
-	Global.tp += 5 * Global.tp_coefficient
-=======
 	health_changed.emit(current_hp)
 	Global.current_battle.tp += 5 * Battle.tp_coefficient
->>>>>>> Stashed changes
 	create_text(str(p_damage) if p_damage > 0 else "MISS", p_character.icon_color)
 	if current_hp < 0:
 		dying = true
