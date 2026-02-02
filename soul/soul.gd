@@ -4,9 +4,9 @@ class_name Soul
 @onready var collision: CollisionPolygon2D = $Collision
 @onready var grazer: Area2D = $Grazer
 @export var heart: Sprite2D
-@export var behaviors : Array[SoulBehavior]
+@export var behaviors: Array[SoulBehavior]
 
-var current_soul_type : SoulType
+var current_soul_type: SoulType
 
 var active := false:
 	set(p_active):
@@ -21,7 +21,7 @@ var grazed_pellets: Array[Pellet] = []
 var invulnerable := false
 
 func _ready() -> void:
-	assign_heart_properties(SoulType.YELLOW)
+	assign_heart_properties(SoulType.RED)
 
 func _process(delta: float) -> void:
 	for i in behaviors:
