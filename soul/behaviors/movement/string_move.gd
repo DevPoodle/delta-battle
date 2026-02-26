@@ -61,7 +61,7 @@ func turn_start() -> void:
 		newRect.size = Vector2(xClamp*2, 1)
 		newRect.global_position = initial_rect_pos - newRect.size/2
 		newRect.z_index = soul.z_index
-		newRect.pivot_offset = Vector2(xClamp*2, 1)
+		newRect.pivot_offset = Vector2(xClamp*2, 1)/2
 		lines.append(newRect)
 		soul.get_parent().add_child(newRect)
 		if current_axis == MoveAxis.Y:
