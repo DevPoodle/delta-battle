@@ -84,11 +84,14 @@ func change_to_scene(p_scene_path: String, p_fade := true) -> void:
 func wait_time(p_time: float) -> Signal:
 	return get_tree().create_timer(p_time).timeout
 
-func set_heart_state(type : SoulType, dir : Direction = Direction.SOUTH) -> void:
+func set_heart_state(type : SoulType, dir : Direction = null) -> void:
 	if (type == soulState.type && dir == soulState.direction):
 		return
 	soulState.set_type(type, false)
-	soulState.set_rotation(dir, false)
+	if dir != null:
+		soulState.set_rotation(dir, false)
+	else:
+		soulState.set_rotation(type.get_default_direction(), false)
 	soulState.emit_changed()
 
 

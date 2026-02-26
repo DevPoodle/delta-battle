@@ -34,6 +34,11 @@ func get_secondary_color() -> Color:
 	final_color.b *= 0.5
 	return final_color
 
+func get_default_direction() -> Direction:
+	if is_monster_soul:
+		return Direction.NORTH
+	return Direction.SOUTH
+
 ## Creates a soul type instance with the default movement.
 static func basic_moving_soul(p_color : Color) -> SoulType:
 	return SoulType.new(p_color).addBehavior("movement/soul_move")
