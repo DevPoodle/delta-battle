@@ -74,7 +74,10 @@ func damage_or_die_animation() -> void:
 		queue_free()
 
 func take_damage(p_character: Character, p_damage: int) -> void:
-	current_hp -= (p_damage - get_defense() * 3)
+	if p_damage > 0:
+		current_hp -= (p_damage - get_defense() * 3)
+	else:
+		current_hp -= 0
 	Global.tp += 5 * Global.tp_coefficient
 	create_text(str(p_damage) if p_damage > 0 else "MISS", p_character.icon_color)
 	if current_hp < 0:
