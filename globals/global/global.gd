@@ -66,8 +66,7 @@ func get_idle_line() -> String:
 	return lines[randi_range(0, lines.size() - 1)]
 
 func delete_item(p_item: int) -> void:
-	items.pop_at(p_item).queue_free()
-	items[p_item] = null
+	items.pop_at(p_item)
 
 func change_to_scene(p_scene_path: String, p_fade := true) -> void:
 	if p_fade:

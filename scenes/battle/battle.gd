@@ -99,7 +99,6 @@ func start_attack() -> void:
 	$Soul.active = true
 	for beh in $Soul.behaviors:
 		beh.turn_start()
-
 	
 	var alive_monsters: Array[Monster] = []
 	for monster: Monster in monsters:
