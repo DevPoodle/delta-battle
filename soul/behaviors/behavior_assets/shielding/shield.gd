@@ -6,6 +6,8 @@ signal collided_with_pellet
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func repel_pellet(_pellet : Pellet) -> void:
+	if animation_player.is_playing():
+		animation_player.stop()
 	animation_player.play("collide")
 	collided_with_pellet.emit()
 

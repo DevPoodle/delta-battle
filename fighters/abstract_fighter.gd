@@ -14,7 +14,8 @@ static var FALLBACK_STATS : Dictionary[Stats, int] = {
 	Stats.DEFENSE: 0,
 	Stats.ATTACK: 0,
 	Stats.MAGIC: 0,
-	Stats.MONEY_MULTIPLIER: 1}
+	Stats.MONEY_MULTIPLIER: 1
+}
 
 signal health_changed(p_new_health: int)
 
@@ -31,6 +32,7 @@ var current_hp := 0:
 
 @export var weapon: Equippable
 @export var armors: Array[Equippable]
+@export var battle : Battle
 
 @export_node_path("Sprite2D") var main_sprite: NodePath
 var sprite: Sprite2D
@@ -43,7 +45,7 @@ func create_shader(shaderName : String) -> void:
 	mat = ShaderMaterial.new()
 	mat.shader = load("res://fighters/shaders/" + shaderName +".gdshader")
 	sprite.material = mat
-	await get_tree().create_timer(randf_range(0.0, 0.6)).timeout
+	#await get_tree().create_timer(randf_range(0.0, 0.6)).timeout
 
 func create_text(p_text: String, p_color: Color) -> void:
 	var new_text := preload("res://ui/battle/floating_text/floating_text.tscn").instantiate()

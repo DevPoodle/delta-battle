@@ -34,7 +34,7 @@ var context := CONTEXT.BATTLE:
 				Global.characters[current_char].do_animation(Character.Animations.IDLE)
 			CONTEXT.ACT_SELECT:
 				$ActSelect.clear_items()
-				var acts := Global.characters[current_char].get_acts(Global.monsters[actions[current_char].to])
+				var acts := Global.characters[current_char].get_acts(Global.current_battle.monsters[actions[current_char].to])
 				for act: Act in acts:
 					$ActSelect.add_item(act.title)
 			CONTEXT.MAGIC_SELECT:
@@ -115,12 +115,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			CONTEXT.MAGIC_SELECT:
 				var spells := Global.characters[current_char].get_spells()
 				var spell := spells[menus[CONTEXT.MAGIC_SELECT].get_current_id()]
-				var tp_cost := Global.tp_percent_to_absolute(spell.tp_percent_cost)
+				var tp_cost := Global.current_battle.tp_percent_to_absolute(spell.tp_percent_cost)
 				
-				if tp_cost > Global.tp:
+				if tp_cost > Global.current_battle.tp:
 					return
 				
-				Global.tp -= tp_cost
+				Global.current_battle.tp -= tp_cost
 				context = CONTEXT.CHAR_SELECT if spell.target == 0 else CONTEXT.MONSTER_SELECT
 				Global.characters[current_char].prep_act()
 				return
@@ -147,10 +147,10 @@ func undo_input() -> void:
 				if Global.characters[current_char].uses_magic:
 					var spells := Global.characters[current_char].get_spells()
 					var spell := spells[menus[CONTEXT.MAGIC_SELECT].get_current_id()]
-					var tp_cost := Global.tp_percent_to_absolute(spell.tp_percent_cost)
-					Global.tp += tp_cost
+					var tp_cost := Global.current_battle.tp_percent_to_absolute(spell.tp_percent_cost)
+					Global.current_battle.tp += tp_cost
 			elif actions[current_char].what == Global.DEFEND:
-				Global.tp -= 40
+				Global.current_battle.tp -= 40
 			char_menus[current_char].activate()
 			char_menus[current_char].deconfirm_action()
 			Global.characters[current_char].do_animation(Character.Animations.IDLE)
@@ -163,9 +163,9 @@ func undo_input() -> void:
 			if actions[current_char].what == Global.ACT and char_menus[current_char].uses_magic:
 				var spells := Global.characters[current_char].get_spells()
 				var spell := spells[menus[CONTEXT.MAGIC_SELECT].get_current_id()]
-				var tp_cost := Global.tp_percent_to_absolute(spell.tp_percent_cost)
+				var tp_cost := Global.current_battle.tp_percent_to_absolute(spell.tp_percent_cost)
 				
-				Global.tp += tp_cost
+				Global.current_battle.tp += tp_cost
 				context = CONTEXT.MAGIC_SELECT
 				return
 		CONTEXT.ACT_SELECT:
@@ -195,7 +195,7 @@ func queue_character_action() -> void:
 		Global.DEFEND:
 			actions[current_char].what = Global.DEFEND
 			Global.characters[current_char].defend()
-			Global.tp += 40 * Global.tp_coefficient
+			Global.current_battle.tp += 40 * Battle.tp_coefficient
 			next_char()
 
 func start_turn() -> void:
@@ -274,14 +274,14 @@ func do_next_action() -> void:
 	var to := action.to
 	if action.what == Global.ACT or action.what == Global.SPARE:
 		var checked := 1
-		while Global.monsters[to] == null and checked <= Global.monsters.size():
-			to = (to + 1) % Global.monsters.size()
+		while Global.current_battle.monsters[to] == null and checked <= Global.current_battle.monsters.size():
+			to = (to + 1) % Global.current_battle.monsters.size()
 			checked += 1
 	match action.what:
 		Global.ACT:
 			if !does_magic:
 				Global.characters[current_char].do_act(
-					Global.monsters[to], action.specific
+					Global.current_battle.monsters[to], action.specific
 				)
 				await Global.characters[current_char].act_finished
 			else:
@@ -298,18 +298,18 @@ func do_next_action() -> void:
 			await Global.characters[current_char].item_used
 		Global.SPARE:
 			Global.characters[current_char].do_spare(
-				Global.monsters[to]
+				Global.current_battle.monsters[to]
 			)
 			await Global.characters[current_char].spare_finished
 	current_char += 1
 	do_next_action()
 
 func do_attack(p_char_id: int, p_damage: int) -> void:
-	var monster := Global.monsters[actions[p_char_id].to]
+	var monster := Global.current_battle.monsters[actions[p_char_id].to]
 	if monster == null:
-		for i: int in Global.monsters.size():
-			if Global.monsters[i] != null:
-				monster = Global.monsters[i]
+		for i: int in Global.current_battle.monsters.size():
+			if Global.current_battle.monsters[i] != null:
+				monster = Global.current_battle.monsters[i]
 				break
 		if monster == null:
 			do_next_action()

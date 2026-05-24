@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://chubr6fl27jfm"]
+[gd_scene load_steps=14 format=3 uid="uid://chubr6fl27jfm"]
 
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="1_21myx"]
 [ext_resource type="Script" uid="uid://uo1143gkpip7" path="res://scenes/menus/customize_battle/customize_battle.gd" id="1_myn3y"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://diunmk8v3dbjq" path="res://holdables/equippables/weapons/spooky_sword.tres" id="4_hsrc4"]
 [ext_resource type="Resource" uid="uid://bmxitgvjg0ble" path="res://holdables/equippables/armors/iron_shackle.tres" id="4_slti3"]
 [ext_resource type="Resource" uid="uid://c0yrdiysbiq0i" path="res://holdables/equippables/armors/white_ribbon.tres" id="5_hsrc4"]
+[ext_resource type="Script" uid="uid://gawjw4foing4" path="res://ui/menu_soul.gd" id="12_pggh3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2i0nk"]
 
@@ -242,11 +243,11 @@ theme_override_font_sizes/font_size = 48
 text = "BACK"
 
 [node name="Heart" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
 material = SubResource("ShaderMaterial_2i0nk")
 position = Vector2(93, 166)
 scale = Vector2(2, 2)
 texture = ExtResource("1_21myx")
+script = ExtResource("12_pggh3")
 
 [connection signal="pressed" from="Main/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Main/VBox/Characters" to="." method="_on_characters_pressed"]

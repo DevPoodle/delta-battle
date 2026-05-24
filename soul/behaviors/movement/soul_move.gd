@@ -2,10 +2,12 @@ extends SoulBehavior
 class_name SoulMove
 
 enum MoveAxis {BOTH, X, Y}
+enum AxisMoveType {NOT_ROTATED, ROTATED}
 
 @export var normalized_movement := false
 @export var speed := 4.0 * 30.0 # 4 pixels per frame
 @export var slow_multiplier := 0.5
+
 @export var current_axis : MoveAxis
 
 func start() -> void:
@@ -29,12 +31,18 @@ func getInput() -> Vector2:
 		int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")),
 		int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	)
-	if current_axis != MoveAxis.BOTH:
+	if current_axis == MoveAxis.X:
 		input.y = 0
-	if current_axis == MoveAxis.Y:
-		input.y = input.x
-		input.x = 0
+	elif current_axis == MoveAxis.Y:
+		if get_move_rotation() == AxisMoveType.ROTATED:
+			input.y = input.x
+			input.x = 0
+		else:
+			input.x = 0
 	return input
+
+func get_move_rotation() -> AxisMoveType:
+	return AxisMoveType.NOT_ROTATED
 
 func apply_speed(input : Vector2) -> Vector2:
 	var final_input := input

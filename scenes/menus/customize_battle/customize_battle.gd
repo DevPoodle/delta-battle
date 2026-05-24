@@ -66,14 +66,14 @@ func _on_start_pressed() -> void:
 	if Global.characters.is_empty():
 		Global.characters.append(characters[0].instantiate())
 	
-	Global.monsters.clear()
+	Global.chosen_monsters.clear()
 	for spin_box: CustomSpinBox in $Enemies/VBox.get_children():
 		if spin_box.option == 0:
 			continue
 		var enemy: Monster = enemies[spin_box.option - 1].instantiate()
-		Global.monsters.append(enemy)
-	if Global.monsters.is_empty():
-		Global.monsters.append(enemies[0].instantiate())
+		Global.chosen_monsters.append(enemy)
+	if Global.chosen_monsters.is_empty():
+		Global.chosen_monsters.append(enemies[0].instantiate())
 	
 	Global.items = [
 		dark_candy, dark_candy, dark_candy, dark_candy, dark_candy, dark_candy, dark_candy, dark_candy
