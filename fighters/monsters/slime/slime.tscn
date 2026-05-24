@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgih30aac76ts" path="res://fighters/monsters/slime/slime.gd" id="1_r1nth"]
 [ext_resource type="Shader" uid="uid://dyrt7gdlbx6eb" path="res://fighters/shaders/generic_monster.gdshader" id="2_7jcwp"]
-[ext_resource type="Script" uid="uid://bwvvm6kvpsqi1" path="res://fighters/characters/acts/act.gd" id="2_la5cp"]
+[ext_resource type="Script" uid="uid://bwvvm6kvpsqi1" path="res://fighters/act.gd" id="2_la5cp"]
 [ext_resource type="Texture2D" uid="uid://c78pfs4rteejq" path="res://fighters/monsters/slime/res/green_slime.png" id="2_r1nth"]
 [ext_resource type="Resource" uid="uid://b0xue5lmmsgi6" path="res://fighters/monsters/slime/acts/dribble.tres" id="3_vwcsi"]
 [ext_resource type="Resource" uid="uid://co7hijqhju0pe" path="res://fighters/monsters/slime/acts/jump.tres" id="4_24fbq"]

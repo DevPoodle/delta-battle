@@ -45,7 +45,7 @@ func do_animation(_p_animation: Animations) -> Signal:
 	return get_tree().create_timer(0.1).timeout
 
 func get_opening_line() -> String:
-	for monster: Monster in Global.monsters:
+	for monster: Monster in Global.current_battle.monsters:
 		if monster == null or monster == self:
 			continue
 		return opening_line_plural
@@ -75,11 +75,12 @@ func damage_or_die_animation() -> void:
 
 func take_damage(p_character: Character, p_damage: int) -> void:
 	current_hp -= (p_damage - get_defense() * 3)
-	Global.tp += 5 * Global.tp_coefficient
+	health_changed.emit(current_hp)
+	Global.current_battle.tp += 5 * Battle.tp_coefficient
 	create_text(str(p_damage) if p_damage > 0 else "MISS", p_character.icon_color)
 	if current_hp < 0:
 		dying = true
-		Global.delete_monster(self, Global.DefeatContext.FLEE)
+		Global.current_battle.delete_monster(self, Battle.DefeatContext.FLEE)
 
 func increase_mercy(p_amount: float) -> void:
 	p_amount = minf(p_amount, 1.0 - mercy_percent)
@@ -90,7 +91,7 @@ func increase_mercy(p_amount: float) -> void:
 func spare() -> void:
 	shake = 0.0
 	await do_animation(Animations.SPARE)
-	Global.delete_monster(self, Global.DefeatContext.SPARED)
+	Global.current_battle.delete_monster(self, Battle.DefeatContext.SPARED)
 	exit_finished.emit()
 	queue_free()
 

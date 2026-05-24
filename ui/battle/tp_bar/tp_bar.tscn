@@ -11,6 +11,8 @@
 shader = ExtResource("2_mxrse")
 shader_parameter/base_color = Color(1, 0.627451, 0.25098, 1)
 shader_parameter/max_color = Color(1, 0.815686, 0.12549, 1)
+shader_parameter/change_color = Color(1, 1, 1, 1)
+shader_parameter/foam_amount = 0.0
 shader_parameter/fill = 0.0
 
 [sub_resource type="FontVariation" id="FontVariation_mxrse"]
@@ -39,6 +41,7 @@ theme_override_fonts/font = SubResource("FontVariation_mxrse")
 text = "0"
 
 [node name="Percent" type="Label" parent="Number"]
+layout_mode = 0
 offset_left = -2.0
 offset_top = 25.0
 offset_right = 26.0

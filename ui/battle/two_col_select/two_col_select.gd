@@ -28,6 +28,7 @@ func set_selected_item(p_item: int) -> void:
 func add_item(p_name: String, p_description := "", p_tp := 0.0) -> void:
 	var new_item: TwoColItem = two_col_item_scene.instantiate()
 	new_item.initialize(p_name, p_description, p_tp)
+	new_item.battle = battle
 	$Clip/Items.add_child(new_item)
 	items.append(new_item)
 	visible_items.append(new_item)

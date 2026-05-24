@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyiveyiwynurb"]
+[gd_scene load_steps=5 format=3 uid="uid://dyiveyiwynurb"]
 
 [ext_resource type="Texture2D" uid="uid://c63ai4f4lswbf" path="res://ui/theme/res/horizontal_logo.png" id="1_5df70"]
 [ext_resource type="Script" uid="uid://c1giws8uwqx1o" path="res://scenes/menus/title_screen/title_screen.gd" id="1_ri6bm"]
 [ext_resource type="Texture2D" uid="uid://b0mx4qepjjvn" path="res://globals/global/res/heart.png" id="2_vuv2h"]
+[ext_resource type="Script" uid="uid://gawjw4foing4" path="res://ui/menu_soul.gd" id="4_lksgi"]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource("1_ri6bm")
@@ -37,10 +38,10 @@ theme_override_font_sizes/font_size = 48
 text = "QUIT"
 
 [node name="Heart" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0, 0, 1)
 position = Vector2(241, 272)
 scale = Vector2(2, 2)
 texture = ExtResource("2_vuv2h")
+script = ExtResource("4_lksgi")
 
 [connection signal="focus_entered" from="Play" to="." method="_on_play_focus_entered"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
