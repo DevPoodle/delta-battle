@@ -171,6 +171,7 @@ func do_act(p_monster: Monster, p_act: int) -> void:
 	acts[p_act].do_act(self, p_monster)
 
 func do_spell(p_entity: Node2D, p_spell: Spell) -> void:
+	await get_tree().create_timer(0.01).timeout
 	if p_entity == null:
 		await do_animation(Animations.ACT)
 		do_animation(Animations.IDLE)
