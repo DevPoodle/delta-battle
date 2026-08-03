@@ -74,7 +74,7 @@ func damage_or_die_animation() -> void:
 		queue_free()
 
 func take_damage(p_character: Character, p_damage: int) -> void:
-  p_damage = maxi(0, p_damage - get_defense() * 3
+	p_damage = maxi(0, p_damage - get_defense() * 3)
 	current_hp -= p_damage
 	health_changed.emit(current_hp)
 	Global.current_battle.tp += 5 * Battle.tp_coefficient
